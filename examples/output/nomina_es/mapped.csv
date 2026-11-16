@@ -1,0 +1,45 @@
+employee_id,first_name,last_name,work_email,personal_email,phone,date_of_birth,start_date,end_date,employment_status,employment_type,job_title,department,manager_id,location,country,salary_amount,salary_currency,pay_frequency,fte
+E00001,Nuria,Ramos Torres,nuria.ramos@lumen-iberia.example,,+34642180967,2001-04-06,2021-01-26,,active,full_time,Desarrollador,Tecnología,,Madrid,,25200.00,,,1
+E00002,Javier,Martínez Fernández,javier.martinez@lumen-iberia.example,,+34670174681,1965-08-11,2020-01-16,,active,part_time,Key Account Manager,Comercial,E00001,Barcelona,,39900.00,,,0.8
+E00003,María,López Gil,maria.lopez@lumen-iberia.example,,+34607666193,1970-05-13,2022-04-11,2026-11-03,terminated,part_time,Agente de Soporte,Atención al Cliente,E00001,Barcelona,,15200.00,,,0.5
+E00004,María,Navarro Sánchez,maria.navarro@lumen-iberia.example,,+34732661663,1970-01-02,2024-01-02,,active,full_time,Administrativo,Administración,E00001,Barcelona,,41100.00,,,1
+E00005,Pablo,Romero Serrano,pablo.romero@lumen-iberia.example,,+34761113930,1970-01-05,2020-04-18,,active,full_time,Técnico de RRHH,Recursos Humanos,E00001,Valencia,,58400.00,,,1
+E00006,Marta,Gil Domínguez,marta.gil@lumen-iberia.example,,+34628367916,1988-03-21,2025-03-31,,on_leave,full_time,Responsable de Sistemas,Tecnología,E00001,Valencia,,53600.00,,,1
+E00007,Elena,Ruiz Romero,elena.ruiz@lumen-iberia.example,,+34789914330,2002-08-10,2022-01-18,,active,full_time,Comercial,Comercial,E00002,Madrid,,31300.00,,,1
+E00008,Javier,Martínez Gómez,javier.martinez2@lumen-iberia.example,,+34707540091,1997-10-05,2022-08-19,2026-09-02,terminated,full_time,Customer Success,Atención al Cliente,E00003,Madrid,,47500.00,,,1
+E00009,Lucía,López Torres,lucia.lopez@lumen-iberia.example,,+34671607909,1966-12-24,2022-08-23,,active,part_time,Contable,Administración,E00004,Valencia,,14900.00,,,0.6
+E00010,Lucía,López Sánchez,lucia.lopez2@lumen-iberia.example,,+34681880491,1990-12-11,2016-11-25,,active,part_time,Técnico de RRHH,Recursos Humanos,E00005,Madrid,,32700.00,,,0.8
+E00011,Jordi,Serrano Domínguez,jordi.serrano@lumen-iberia.example,,+34657735643,1964-06-10,2016-09-18,,on_leave,full_time,Desarrolladora Senior,Tecnología,E00001,Madrid,,54900.00,,,1
+E00012,Sofía,Muñoz Fernández,sofia.munoz@lumen-iberia.example,,+34717743668,1995-06-27,2025-04-04,,active,full_time,Director Comercial,Comercial,E00002,Barcelona,,58000.00,,,1
+E00013,Javier,Díaz Serrano,javier.diaz@lumen-iberia.example,,+34730432017,1981-10-12,2019-02-28,,active,part_time,Agente de Soporte,Atención al Cliente,E00003,Barcelona,,19600.00,,,0.5
+E00014,Laura,Fernández Domínguez,laura.fernandez@lumen-iberia.example,,+34788926316,1964-08-18,2024-10-06,,active,full_time,Administrativo,Administración,E00004,Madrid,,45300.00,,,1
+E00015,María,Romero Ramos,maria.romero@lumen-iberia.example,,+34661485405,1996-06-15,2019-06-13,,active,intern,Técnico de RRHH,Recursos Humanos,E00005,Valencia,,10500.00,,,0.5
+E00016,Raúl,Navarro Díaz,raul.navarro@lumen-iberia.example,,+34727288779,1965-04-26,2016-06-14,,active,full_time,Desarrollador,Tecnología,E00001,Madrid,,45000.00,,,1
+E00017,Andrés,Ramos Gómez,andres.ramos@lumen-iberia.example,,+34628849736,1999-05-10,2020-12-31,,active,intern,Key Account Manager,Comercial,E00002,Valencia,,10500.00,,,0.5
+E00018,María,Ramos Martínez,maria.ramos@lumen-iberia.example,,+34787664377,1989-09-26,2016-06-24,,active,full_time,Customer Success,Atención al Cliente,E00003,Valencia,,24000.00,,,1
+E00019,Paula,Sánchez Fernández,paula.sanchez@lumen-iberia.example,,+34604553971,1965-05-05,2019-11-03,,active,intern,Contable,Administración,E00004,Madrid,,10500.00,,,0.5
+E00020,Elena,Fernández Vázquez,elena.fernandez@lumen-iberia.example,,+34683838992,1988-11-14,2026-07-04,,active,full_time,Técnico de RRHH,Recursos Humanos,E00005,Madrid,,59900.00,,,1
+E00021,Paula,Fernández Fernández,paula.fernandez@lumen-iberia.example,,+34768236013,1970-03-08,2016-10-24,,on_leave,full_time,Responsable de Sistemas,Tecnología,E00001,Barcelona,,40600.00,,,1
+E00022,Irene,Muñoz Vázquez,irene.munoz@lumen-iberia.example,,+34721322419,1976-02-16,2017-06-05,2026-10-23,terminated,part_time,Comercial,Comercial,E00002,Valencia,,22100.00,,,0.8
+E00023,Paula,Romero Torres,paula.romero@lumen-iberia.example,,+34626755639,1986-07-07,2020-12-27,,active,full_time,Agente de Soporte,Atención al Cliente,E00003,Madrid,,59000.00,,,1
+E00024,Carmen,Gil Serrano,carmen.gil@lumen-iberia.example,,+34662585626,2001-06-26,2021-02-10,,active,full_time,Administrativo,Administración,E00004,Barcelona,,57700.00,,,1
+E00025,Jordi,Sánchez García,jordi.sanchez@lumen-iberia.example,,+34692816873,1967-04-09,2019-08-09,,active,full_time,Técnico de RRHH,Recursos Humanos,E00005,Madrid,,50700.00,,,1
+E00026,Carlos,Ruiz Díaz,carlos.ruiz@lumen-iberia.example,,+34658886891,1996-01-25,2022-04-07,,on_leave,full_time,Desarrolladora Senior,Tecnología,E00001,Madrid,,32300.00,,,1
+E00027,Carmen,Domínguez Gómez,carmen.dominguez@lumen-iberia.example,,+34658474844,2002-01-14,2020-09-09,,active,full_time,Director Comercial,Comercial,E00002,Madrid,,47900.00,,,1
+E00028,Pablo,Navarro Romero,pablo.navarro@lumen-iberia.example,,+34643081723,1984-12-13,2016-09-13,2026-06-01,terminated,full_time,Customer Success,Atención al Cliente,E00003,Barcelona,,53400.00,,,1
+E00029,Nuria,Sánchez Fernández,nuria.sanchez@lumen-iberia.example,,+34796582423,1997-03-04,2022-10-07,,active,full_time,Contable,Administración,E00004,Barcelona,,48000.00,,,1
+E00030,Diego,Díaz Díaz,diego.diaz@lumen-iberia.example,,+34683000446,2000-12-19,2019-02-01,,on_leave,full_time,Técnico de RRHH,Recursos Humanos,E00005,Valencia,,63800.00,,,1
+E00031,Raúl,Díaz López,raul.diaz@lumen-iberia.example,,+34757211793,1974-09-08,2016-07-12,,active,full_time,Desarrollador,Tecnología,E00001,Barcelona,,2178.57,,,1
+E00032,Diego,Pérez Serrano,diego.perez@lumen-iberia.example,,+34651816997,1999-12-27,2023-07-04,,active,full_time,Key Account Manager,Comercial,E00002,Madrid,,41800.00,,,1
+E00033,Laura,Serrano López,laura.serrano@lumen-iberia.example,,+34755157994,1995-12-25,2023-05-12,,active,full_time,Agente de Soporte,Atención al Cliente,E00003,Valencia,,37100.00,,,1
+E00034,Sergio,Romero Vázquez,sergio.romero@lumen-iberia.example,,+34756829922,1987-06-01,2025-10-27,,active,full_time,Administrativo,Administración,E00004,Barcelona,,54200.00,,,1
+E00035,Irene,Martínez Ramos,irene.martinez@lumen-iberia.example,,+34715141510,1982-01-21,2020-05-27,,active,full_time,Técnico de RRHH,Recursos Humanos,E00005,Barcelona,,56500.00,,,1
+E00036,Sergio,Domínguez Vázquez,sergio.dominguez@lumen-iberia.example,,+34681906506,1993-07-12,2018-03-11,,active,intern,Responsable de Sistemas,Tecnología,E00001,Madrid,,10500.00,,,0.5
+E00037,María,Sánchez Navarro,maria.sanchez@lumen-iberia.example,,+34666844074,1973-04-24,2016-07-01,,on_leave,full_time,Comercial,Comercial,E00002,Madrid,,35400.00,,,1
+E00038,Nuria,García Gil,nuria.garcia@lumen-iberia.example,,+34779837246,1966-06-04,2016-07-27,,on_leave,full_time,Customer Success,Atención al Cliente,E00003,Madrid,,48000.00,,,1
+E00039,Carmen,Muñoz Ramos,carmen.munoz@lumen-iberia.example,,+34703075736,1978-07-02,2021-05-10,,active,full_time,Contable,Administración,E00004,Barcelona,,56400.00,,,1
+E00040,Marta,Díaz Vázquez,marta.diaz@lumen-iberia.example,,+34622154981,1981-09-18,2019-08-16,2026-01-23,terminated,part_time,Técnico de RRHH,Recursos Humanos,E00005,Barcelona,,29000.00,,,0.5
+E00041,Raúl,Vázquez Moreno,raul.vazquez@lumen-iberia.example,,+34768724546,1976-07-07,2017-11-30,,active,full_time,Desarrolladora Senior,Tecnología,E00001,Barcelona,,22700.00,,,1
+E00042,Lucía,Álvarez López,lucia.alvarez@lumen-iberia.example,,+34667349170,1970-11-13,2025-03-11,,active,part_time,Director Comercial,Comercial,E00002,Valencia,,10800.00,,,0.5
+E00043,Carmen,Ramos Moreno,carmen.ramos@lumen-iberia.example,,+34649757611,1989-09-22,2018-04-20,2026-08-07,terminated,full_time,Agente de Soporte,Atención al Cliente,E00003,Madrid,,35800.00,,,1
+E00045,Carmen,Serrano Muñoz,carmen.serrano@lumen-iberia.example,,+34763854192,2002-09-01,2019-05-13,,active,full_time,Técnico de RRHH,Recursos Humanos,E00005,Barcelona,,25800.00,,,1

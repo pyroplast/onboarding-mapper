@@ -1,0 +1,6 @@
+id,kind,severity,code,field,source,row,value,problem,suggestion,decision
+R0001,value,error,DATE_OUT_OF_RANGE,start_date,Eintrittsdatum,9,2062-10-28,more than 366 days in the future,,
+R0002,mapping,warning,NUMBER_STYLE_ASSUMED,salary_amount,Jahresgehalt,,,50 values read either way and none settles the decimal separator; assumed 1.234 = one thousand two hundred thirty-four,confirm and set options.number_style in the mapping file,
+R0003,privacy,warning,SENSITIVE_HELD_BACK,,Steuer-ID,,,looks like government ID number (header “Steuer-ID”); not read into any output,"confirm it should not be imported, and agree how it is transferred if it must be",
+R0004,privacy,warning,SENSITIVE_HELD_BACK,,Konfession,,,looks like special-category personal data (header “Konfession”); not read into any output,"confirm it should not be imported, and agree how it is transferred if it must be",
+R0005,value,warning,UNRESOLVED_REF,manager_id,Vorgesetzter,35,k.vogel@nordwind.example,no employee in this file matches this manager,"the manager may be missing from the export, or have left",

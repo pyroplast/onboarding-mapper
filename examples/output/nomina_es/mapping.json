@@ -1,0 +1,450 @@
+{
+  "tool": "onboarding-mapper",
+  "version": "0.1.0",
+  "schema": {
+    "name": "employee",
+    "version": "1",
+    "sha256": "edd3951f7a2d20c261dd78977b382e2a373038ea5598433324b29fd824f4a6e0"
+  },
+  "source": {
+    "fingerprint": "13185a79fb784fc2",
+    "headers": [
+      "Nº Empleado",
+      "Apellidos, Nombre",
+      "DNI/NIE",
+      "Correo electrónico",
+      "Teléfono",
+      "Fecha nacimiento",
+      "Fecha de alta",
+      "Fecha de baja",
+      "Situación",
+      "Jornada",
+      "% Jornada",
+      "Tipo de contrato",
+      "Puesto",
+      "Departamento",
+      "Responsable",
+      "Centro de trabajo",
+      "Salario bruto anual",
+      "IBAN"
+    ]
+  },
+  "how_to_edit": "Set a field's status to 'accepted' or 'rejected', or change its 'source' to another header and set status 'accepted'. Options such as date_order ('dmy'/'mdy') and number_style ('eu'/'us') can be changed too. Then run: omap apply <export> --mapping <this file>.",
+  "fields": [
+    {
+      "field": "employee_id",
+      "source": "Nº Empleado",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “number empleado”",
+        "100% unique, 100% id-shaped"
+      ],
+      "alternatives": [
+        {
+          "source": "Apellidos, Nombre",
+          "confidence": 0.326
+        },
+        {
+          "source": "Teléfono",
+          "confidence": 0.305
+        }
+      ]
+    },
+    {
+      "field": "first_name",
+      "source": "Apellidos, Nombre",
+      "method": "split_full_name",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "name_order": "last_first",
+        "part": "first"
+      },
+      "reasons": [
+        "header matches alias “apellidos nombre”",
+        "100% of values look like multi-word names",
+        "split from a full-name column (last first)"
+      ],
+      "alternatives": [
+        {
+          "source": "Apellidos, Nombre",
+          "confidence": 0.817
+        },
+        {
+          "source": "Situación",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "last_name",
+      "source": "Apellidos, Nombre",
+      "method": "split_full_name",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "name_order": "last_first",
+        "part": "last"
+      },
+      "reasons": [
+        "header matches alias “apellidos nombre”",
+        "100% of values look like multi-word names",
+        "split from a full-name column (last first)"
+      ],
+      "alternatives": [
+        {
+          "source": "Apellidos, Nombre",
+          "confidence": 0.817
+        },
+        {
+          "source": "Situación",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "work_email",
+      "source": "Correo electrónico",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “email electronico”",
+        "100% valid emails, 100% share one domain"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "personal_email",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": [
+        {
+          "source": "Correo electrónico",
+          "confidence": 0.337
+        }
+      ]
+    },
+    {
+      "field": "phone",
+      "source": "Teléfono",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “telefono”",
+        "100% look like phone numbers"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "date_of_birth",
+      "source": "Fecha nacimiento",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 23,
+          "month_first_only": 0,
+          "either": 19
+        }
+      },
+      "reasons": [
+        "header matches alias “fecha nacimiento”",
+        "100% parse as dates"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "start_date",
+      "source": "Fecha de alta",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 24,
+          "month_first_only": 0,
+          "either": 17
+        }
+      },
+      "reasons": [
+        "header matches alias “fecha de alta”",
+        "100% parse as dates"
+      ],
+      "alternatives": [
+        {
+          "source": "Fecha nacimiento",
+          "confidence": 0.5
+        },
+        {
+          "source": "Fecha de baja",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "end_date",
+      "source": "Fecha de baja",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 2,
+          "month_first_only": 0,
+          "either": 5
+        }
+      },
+      "reasons": [
+        "header matches alias “fecha de baja”",
+        "100% parse as dates"
+      ],
+      "alternatives": [
+        {
+          "source": "Fecha de alta",
+          "confidence": 0.75
+        },
+        {
+          "source": "Fecha nacimiento",
+          "confidence": 0.431
+        }
+      ]
+    },
+    {
+      "field": "employment_status",
+      "source": "Situación",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “situacion”",
+        "100% of values are known employment_status values"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "employment_type",
+      "source": "Jornada",
+      "method": "direct",
+      "confidence": 0.87,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “jornada”",
+        "100% of values are known employment_type values"
+      ],
+      "alternatives": [
+        {
+          "source": "Tipo de contrato",
+          "confidence": 0.487
+        },
+        {
+          "source": "% Jornada",
+          "confidence": 0.343
+        }
+      ]
+    },
+    {
+      "field": "job_title",
+      "source": "Puesto",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “puesto”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Centro de trabajo",
+          "confidence": 0.5
+        },
+        {
+          "source": "Situación",
+          "confidence": 0.487
+        }
+      ]
+    },
+    {
+      "field": "department",
+      "source": "Departamento",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “departamento”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Situación",
+          "confidence": 0.46
+        },
+        {
+          "source": "Puesto",
+          "confidence": 0.44
+        }
+      ]
+    },
+    {
+      "field": "manager_id",
+      "source": "Responsable",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “responsable”",
+        "values look like ids, emails or names"
+      ],
+      "alternatives": [
+        {
+          "source": "Nº Empleado",
+          "confidence": 0.5
+        },
+        {
+          "source": "Apellidos, Nombre",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "location",
+      "source": "Centro de trabajo",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “centro de trabajo”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Situación",
+          "confidence": 0.48
+        },
+        {
+          "source": "Departamento",
+          "confidence": 0.461
+        }
+      ]
+    },
+    {
+      "field": "country",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": []
+    },
+    {
+      "field": "salary_amount",
+      "source": "Salario bruto anual",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "number_style": "eu",
+        "number_style_evidence": {
+          "decimal_comma": 45,
+          "decimal_point": 0,
+          "either": 0
+        }
+      },
+      "reasons": [
+        "header matches alias “salario bruto anual”",
+        "100% parse as amounts"
+      ],
+      "alternatives": [
+        {
+          "source": "Teléfono",
+          "confidence": 0.5
+        },
+        {
+          "source": "% Jornada",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "salary_currency",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": []
+    },
+    {
+      "field": "pay_frequency",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": []
+    },
+    {
+      "field": "fte",
+      "source": "% Jornada",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "number_style": "eu",
+        "number_style_evidence": {
+          "decimal_comma": 0,
+          "decimal_point": 0,
+          "either": 0
+        }
+      },
+      "reasons": [
+        "header matches alias “percent jornada”",
+        "100% look like FTE values or percentages"
+      ],
+      "alternatives": []
+    }
+  ],
+  "held_back": [
+    {
+      "source": "DNI/NIE",
+      "category": "government_id",
+      "label": "government ID number",
+      "reason": "header “DNI/NIE”"
+    },
+    {
+      "source": "IBAN",
+      "category": "bank_account",
+      "label": "bank account detail",
+      "reason": "header “IBAN”"
+    }
+  ],
+  "unused": [
+    {
+      "source": "Tipo de contrato",
+      "reason": "closest field is first_name at 0.50, below the 0.55 threshold"
+    }
+  ]
+}

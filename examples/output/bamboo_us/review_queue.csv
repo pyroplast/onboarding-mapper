@@ -1,0 +1,9 @@
+id,kind,severity,code,field,source,row,value,problem,suggestion,decision
+R0001,record,error,DUPLICATE_KEY,employee_id,Employee #,6,0005,"employee_id appears on 2 rows (lines 6, 62)",keep one row (often the latest hire record) or give each a distinct value,
+R0002,record,error,DUPLICATE_KEY,work_email,Work Email,6,grace.hill@acme-robotics.example,"work_email appears on 2 rows (lines 6, 62)",keep one row (often the latest hire record) or give each a distinct value,
+R0003,record,error,DUPLICATE_KEY,employee_id,Employee #,62,0005,"employee_id appears on 2 rows (lines 6, 62)",keep one row (often the latest hire record) or give each a distinct value,
+R0004,record,error,END_BEFORE_START,end_date,,62,,end_date is before start_date,,
+R0005,record,error,DUPLICATE_KEY,work_email,Work Email,62,grace.hill@acme-robotics.example,"work_email appears on 2 rows (lines 6, 62)",keep one row (often the latest hire record) or give each a distinct value,
+R0006,value,error,INVALID_EMAIL,work_email,Work Email,19,lucas.walker @acme-robotics.example,not a valid email address,,
+R0007,mapping,warning,CONFIRM_MAPPING,employment_type,Employment Status,,,proposed with confidence 0.64: header resembles alias “employment type”; 100% of values are known employment_type values,"accept, or pick another column. Other candidates: none",
+R0008,privacy,warning,SENSITIVE_HELD_BACK,,SSN,,,looks like government ID number (header “SSN”); not read into any output,"confirm it should not be imported, and agree how it is transferred if it must be",

@@ -1,0 +1,2 @@
+_source_row,_errors,employee_id,first_name,last_name,work_email,personal_email,phone,date_of_birth,start_date,end_date,employment_status,employment_type,job_title,department,manager_id,location,country,salary_amount,salary_currency,pay_frequency,fte
+9,start_date: more than 366 days in the future,1008,Lena,Wagner,lena.wagner@nordwind.example,lena49@gmail.com,+491688288441,1992-12-14,2062-10-28,,active,full_time,Support Spezialistin,Kundenservice,1003,Berlin,DE,83000.00,EUR,,

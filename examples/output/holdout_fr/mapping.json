@@ -1,0 +1,466 @@
+{
+  "tool": "onboarding-mapper",
+  "version": "0.1.0",
+  "schema": {
+    "name": "employee",
+    "version": "1",
+    "sha256": "edd3951f7a2d20c261dd78977b382e2a373038ea5598433324b29fd824f4a6e0"
+  },
+  "source": {
+    "fingerprint": "d6b72129327cfc52",
+    "headers": [
+      "Matricule",
+      "Civilité",
+      "Prénom",
+      "Nom d'usage",
+      "Adresse e-mail professionnelle",
+      "E-mail personnel",
+      "Téléphone portable",
+      "Date de naissance",
+      "Date d'entrée dans l'entreprise",
+      "Date de sortie",
+      "Statut du salarié",
+      "Type de contrat de travail",
+      "Temps de travail",
+      "Intitulé du poste",
+      "Service",
+      "Manager (matricule)",
+      "Établissement",
+      "Pays",
+      "Rémunération annuelle brute",
+      "Devise",
+      "Taux d'activité",
+      "N° de sécurité sociale",
+      "RIB"
+    ]
+  },
+  "how_to_edit": "Set a field's status to 'accepted' or 'rejected', or change its 'source' to another header and set status 'accepted'. Options such as date_order ('dmy'/'mdy') and number_style ('eu'/'us') can be changed too. Then run: omap apply <export> --mapping <this file>.",
+  "fields": [
+    {
+      "field": "employee_id",
+      "source": "Matricule",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “matricule”",
+        "100% unique, 100% id-shaped"
+      ],
+      "alternatives": [
+        {
+          "source": "Téléphone portable",
+          "confidence": 0.302
+        }
+      ]
+    },
+    {
+      "field": "first_name",
+      "source": "Prénom",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "name_order": "first_last"
+      },
+      "reasons": [
+        "header matches alias “prenom”",
+        "100% of values look like names"
+      ],
+      "alternatives": [
+        {
+          "source": "Nom d'usage",
+          "confidence": 0.5
+        },
+        {
+          "source": "Statut du salarié",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "last_name",
+      "source": "Nom d'usage",
+      "method": "direct",
+      "confidence": 0.883,
+      "status": "auto",
+      "options": {
+        "name_order": "first_last"
+      },
+      "reasons": [
+        "header contains alias “nom”",
+        "100% of values look like names"
+      ],
+      "alternatives": [
+        {
+          "source": "Prénom",
+          "confidence": 0.5
+        },
+        {
+          "source": "Statut du salarié",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "work_email",
+      "source": "Adresse e-mail professionnelle",
+      "method": "direct",
+      "confidence": 0.922,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header contains alias “adresse email”",
+        "100% valid emails, 100% share one domain"
+      ],
+      "alternatives": [
+        {
+          "source": "E-mail personnel",
+          "confidence": 0.696
+        }
+      ]
+    },
+    {
+      "field": "personal_email",
+      "source": "E-mail personnel",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “email personnel”",
+        "100% valid emails, 100% on free-mail domains"
+      ],
+      "alternatives": [
+        {
+          "source": "Adresse e-mail professionnelle",
+          "confidence": 0.345
+        }
+      ]
+    },
+    {
+      "field": "phone",
+      "source": "Téléphone portable",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “telephone portable”",
+        "100% look like phone numbers"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "date_of_birth",
+      "source": "Date de naissance",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 22,
+          "month_first_only": 0,
+          "either": 15
+        }
+      },
+      "reasons": [
+        "header matches alias “date de naissance”",
+        "100% parse as dates"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "start_date",
+      "source": "Date d'entrée dans l'entreprise",
+      "method": "direct",
+      "confidence": 0.844,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 27,
+          "month_first_only": 0,
+          "either": 13
+        }
+      },
+      "reasons": [
+        "header contains alias “date d entree”",
+        "100% parse as dates"
+      ],
+      "alternatives": [
+        {
+          "source": "Date de naissance",
+          "confidence": 0.5
+        },
+        {
+          "source": "Date de sortie",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "end_date",
+      "source": "Date de sortie",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 5,
+          "month_first_only": 0,
+          "either": 1
+        }
+      },
+      "reasons": [
+        "header matches alias “date de sortie”",
+        "100% parse as dates"
+      ],
+      "alternatives": [
+        {
+          "source": "Date de naissance",
+          "confidence": 0.458
+        },
+        {
+          "source": "Date d'entrée dans l'entreprise",
+          "confidence": 0.432
+        }
+      ]
+    },
+    {
+      "field": "employment_status",
+      "source": "Statut du salarié",
+      "method": "direct",
+      "confidence": 0.848,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header contains alias “statut”",
+        "90% of values are known employment_status values"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "employment_type",
+      "source": "Temps de travail",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “temps de travail”",
+        "100% of values are known employment_type values"
+      ],
+      "alternatives": [
+        {
+          "source": "Type de contrat de travail",
+          "confidence": 0.449
+        }
+      ]
+    },
+    {
+      "field": "job_title",
+      "source": "Intitulé du poste",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “intitule du poste”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Matricule",
+          "confidence": 0.463
+        },
+        {
+          "source": "Prénom",
+          "confidence": 0.45
+        }
+      ]
+    },
+    {
+      "field": "department",
+      "source": "Service",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “service”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Devise",
+          "confidence": 0.471
+        },
+        {
+          "source": "Établissement",
+          "confidence": 0.465
+        }
+      ]
+    },
+    {
+      "field": "manager_id",
+      "source": "Manager (matricule)",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “manager”",
+        "values look like ids, emails or names"
+      ],
+      "alternatives": [
+        {
+          "source": "Matricule",
+          "confidence": 0.5
+        },
+        {
+          "source": "Adresse e-mail professionnelle",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "location",
+      "source": "Établissement",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “etablissement”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Temps de travail",
+          "confidence": 0.493
+        },
+        {
+          "source": "Type de contrat de travail",
+          "confidence": 0.463
+        }
+      ]
+    },
+    {
+      "field": "country",
+      "source": "Pays",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “pays”",
+        "100% are countries"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "salary_amount",
+      "source": "Rémunération annuelle brute",
+      "method": "direct",
+      "confidence": 0.883,
+      "status": "auto",
+      "options": {
+        "number_style": "eu",
+        "number_style_evidence": {
+          "decimal_comma": 40,
+          "decimal_point": 0,
+          "either": 0
+        }
+      },
+      "reasons": [
+        "header contains alias “remuneration”",
+        "100% parse as amounts"
+      ],
+      "alternatives": [
+        {
+          "source": "Téléphone portable",
+          "confidence": 0.5
+        },
+        {
+          "source": "Taux d'activité",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "salary_currency",
+      "source": "Devise",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “devise”",
+        "100% are currency codes"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "pay_frequency",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": [
+        {
+          "source": "Civilité",
+          "confidence": 0.368
+        }
+      ]
+    },
+    {
+      "field": "fte",
+      "source": "Taux d'activité",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "number_style": "eu",
+        "number_style_evidence": {
+          "decimal_comma": 0,
+          "decimal_point": 0,
+          "either": 0
+        }
+      },
+      "reasons": [
+        "header matches alias “taux d activite”",
+        "100% look like FTE values or percentages"
+      ],
+      "alternatives": []
+    }
+  ],
+  "held_back": [
+    {
+      "source": "N° de sécurité sociale",
+      "category": "government_id",
+      "label": "government ID number",
+      "reason": "header “N° de sécurité sociale”"
+    },
+    {
+      "source": "RIB",
+      "category": "bank_account",
+      "label": "bank account detail",
+      "reason": "header “RIB”"
+    }
+  ],
+  "unused": [
+    {
+      "source": "Civilité",
+      "reason": "closest field is pay_frequency at 0.37, below the 0.55 threshold"
+    },
+    {
+      "source": "Type de contrat de travail",
+      "reason": "closest field is first_name at 0.50, below the 0.55 threshold"
+    }
+  ]
+}

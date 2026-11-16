@@ -1,0 +1,31 @@
+_source_row,_errors,employee_id,first_name,last_name,work_email,personal_email,phone,date_of_birth,start_date,end_date,employment_status,employment_type,job_title,department,manager_id,location,country,salary_amount,salary_currency,pay_frequency,fte
+4,employee_id: required field has no source column,,Mia,Hill,mia.hill@brightpath.example,,,,2022-08-14,,active,full_time,Software Engineer,Engineering,,,IE,73300.00,EUR,,1
+5,employee_id: required field has no source column,,Liam,Wilson,liam.wilson@brightpath.example,,,,2023-05-23,,active,contractor,Sales Development Rep,Sales,,,PT,62000.00,EUR,,1
+6,employee_id: required field has no source column,,Zoe,Adams,zoe.adams@brightpath.example,,,,2020-04-30,,active,full_time,Customer Success Manager,Customer Success,,,PT,95300.00,EUR,,1
+7,employee_id: required field has no source column,,Nora,Baker,nora.baker@brightpath.example,,,,2022-11-28,2026-04-07,terminated,part_time,Controller,Finance,,,NL,38600.00,EUR,,0.5
+8,employee_id: required field has no source column,,Hannah,Nelson,hannah.nelson@brightpath.example,,,,2016-02-16,,active,full_time,HR Business Partner,People,,,PT,56200.00,EUR,,1
+9,employee_id: required field has no source column,,Mia,Young,mia.young@brightpath.example,,,,2023-11-15,,active,part_time,Senior Software Engineer,Engineering,,,NL,28000.00,EUR,,0.8
+10,employee_id: required field has no source column,,Olivia,Smith,olivia.smith@brightpath.example,,,,2023-12-14,,active,full_time,Account Executive,Sales,,,ES,88200.00,EUR,,1
+11,employee_id: required field has no source column,,Mia,Allen,mia.allen@brightpath.example,,,,2019-03-01,2026-05-31,terminated,contractor,Support Specialist,Customer Success,,,PT,65200.00,EUR,,1
+12,employee_id: required field has no source column,,Ava,Walker,ava.walker@brightpath.example,,,,2017-09-18,,active,full_time,Financial Analyst,Finance,,,IE,67100.00,EUR,,1
+13,employee_id: required field has no source column,,Zoe,Nelson,zoe.nelson@brightpath.example,,,,2026-05-28,,active,full_time,Recruiter,People,,,PT,95600.00,EUR,,1
+14,employee_id: required field has no source column,,Emma,Wilson,emma.wilson@brightpath.example,,,,2024-02-01,,active,contractor,Engineering Manager,Engineering,,,PT,58200.00,EUR,,1
+15,employee_id: required field has no source column,,Noah,Smith,noah.smith@brightpath.example,,,,2019-09-20,,active,full_time,Sales Manager,Sales,,,PT,37300.00,EUR,,1
+16,employee_id: required field has no source column,,Nora,Allen,nora.allen@brightpath.example,,,,2023-03-29,,active,full_time,Customer Success Manager,Customer Success,,,IE,47400.00,EUR,,1
+17,employee_id: required field has no source column,,Owen,Johnson,owen.johnson@brightpath.example,,,,2026-03-04,,active,full_time,Controller,Finance,,,IE,66800.00,EUR,,1
+18,employee_id: required field has no source column,,Leah,Walker,leah.walker@brightpath.example,,,,2021-07-24,,active,full_time,HR Business Partner,People,,,NL,86400.00,EUR,,1
+19,employee_id: required field has no source column,,Owen,Wilson,owen.wilson@brightpath.example,,,,2022-12-09,2026-03-10,terminated,part_time,QA Engineer,Engineering,,,IE,54700.00,EUR,,0.6
+20,employee_id: required field has no source column,,Liam,Clark,liam.clark@brightpath.example,,,,2019-07-11,,active,contractor,Sales Development Rep,Sales,,,IE,76800.00,EUR,,1
+21,employee_id: required field has no source column,,Owen,Miller,owen.miller@brightpath.example,,,,2025-09-10,,active,full_time,Support Specialist,Customer Success,,,IE,43400.00,EUR,,1
+22,employee_id: required field has no source column,,James,Walker,james.walker@brightpath.example,,,,2017-10-01,,active,full_time,Financial Analyst,Finance,,,IE,63700.00,EUR,,1
+23,employee_id: required field has no source column,,Mia,Brown,mia.brown@brightpath.example,,,,2017-03-11,,active,full_time,Recruiter,People,,,IE,98400.00,EUR,,1
+24,employee_id: required field has no source column,,Chloe,Green,chloe.green@brightpath.example,,,,2026-09-09,,active,full_time,Software Engineer,Engineering,,,IE,61700.00,EUR,,1
+25,employee_id: required field has no source column,,Chloe,King,chloe.king@brightpath.example,,,,2023-06-15,,active,full_time,Account Executive,Sales,,,ES,81600.00,EUR,,1
+26,employee_id: required field has no source column,,Noah,Allen,noah.allen@brightpath.example,,,,2020-07-18,,active,full_time,Customer Success Manager,Customer Success,,,IE,41300.00,EUR,,1
+27,employee_id: required field has no source column,,Nora,Adams,nora.adams@brightpath.example,,,,2023-12-30,,active,full_time,Controller,Finance,,,NL,69500.00,EUR,,1
+28,employee_id: required field has no source column,,Ryan,Campbell,ryan.campbell@brightpath.example,,,,2017-02-16,,active,full_time,HR Business Partner,People,,,IE,60200.00,EUR,,1
+29,employee_id: required field has no source column,,James,Campbell,james.campbell@brightpath.example,,,,2018-08-13,,active,full_time,Senior Software Engineer,Engineering,,,ES,47900.00,EUR,,1
+30,employee_id: required field has no source column,,Chloe,Campbell,chloe.campbell@brightpath.example,,,,2021-02-03,2026-05-22,terminated,full_time,Sales Manager,Sales,,,PT,39400.00,EUR,,1
+31,employee_id: required field has no source column,,Zoe,Brown,zoe.brown@brightpath.example,,,,2018-11-07,,active,full_time,Support Specialist,Customer Success,,,ES,80300.00,EUR,,1
+32,employee_id: required field has no source column,,Isaac,King,isaac.king@brightpath.example,,,,2024-04-04,,active,full_time,Financial Analyst,Finance,,,NL,45100.00,EUR,,1
+33,employee_id: required field has no source column,,Ava,Johnson,ava.johnson@brightpath.example,,,,2022-03-31,2026-10-16,terminated,full_time,Recruiter,People,,,PT,69100.00,EUR,,1

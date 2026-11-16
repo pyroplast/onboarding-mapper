@@ -1,0 +1,416 @@
+{
+  "tool": "onboarding-mapper",
+  "version": "0.1.0",
+  "schema": {
+    "name": "employee",
+    "version": "1",
+    "sha256": "edd3951f7a2d20c261dd78977b382e2a373038ea5598433324b29fd824f4a6e0"
+  },
+  "source": {
+    "fingerprint": "c7c44b16726b4adb",
+    "headers": [
+      "Title",
+      "Name",
+      "Email",
+      "Job",
+      "Team",
+      "Manager email",
+      "Start",
+      "Left on",
+      "Status",
+      "Type",
+      "FTE %",
+      "Salary",
+      "Country",
+      "Notes",
+      "Previous employer"
+    ]
+  },
+  "how_to_edit": "Set a field's status to 'accepted' or 'rejected', or change its 'source' to another header and set status 'accepted'. Options such as date_order ('dmy'/'mdy') and number_style ('eu'/'us') can be changed too. Then run: omap apply <export> --mapping <this file>.",
+  "fields": [
+    {
+      "field": "employee_id",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": [
+        {
+          "source": "Salary",
+          "confidence": 0.345
+        },
+        {
+          "source": "Name",
+          "confidence": 0.305
+        }
+      ]
+    },
+    {
+      "field": "first_name",
+      "source": "Name",
+      "method": "split_full_name",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "name_order": "first_last",
+        "part": "first"
+      },
+      "reasons": [
+        "header matches alias “name”",
+        "100% of values look like multi-word names",
+        "split from a full-name column (first last)"
+      ],
+      "alternatives": [
+        {
+          "source": "Name",
+          "confidence": 0.765
+        },
+        {
+          "source": "Team",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "last_name",
+      "source": "Name",
+      "method": "split_full_name",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "name_order": "first_last",
+        "part": "last"
+      },
+      "reasons": [
+        "header matches alias “name”",
+        "100% of values look like multi-word names",
+        "split from a full-name column (first last)"
+      ],
+      "alternatives": [
+        {
+          "source": "Name",
+          "confidence": 0.765
+        },
+        {
+          "source": "Team",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "work_email",
+      "source": "Email",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “email”",
+        "100% valid emails, 100% share one domain"
+      ],
+      "alternatives": [
+        {
+          "source": "Manager email",
+          "confidence": 0.922
+        }
+      ]
+    },
+    {
+      "field": "personal_email",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": [
+        {
+          "source": "Email",
+          "confidence": 0.354
+        },
+        {
+          "source": "Manager email",
+          "confidence": 0.345
+        }
+      ]
+    },
+    {
+      "field": "phone",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": []
+    },
+    {
+      "field": "date_of_birth",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": []
+    },
+    {
+      "field": "start_date",
+      "source": "Start",
+      "method": "direct",
+      "confidence": 0.935,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 7,
+          "month_first_only": 0,
+          "either": 2
+        }
+      },
+      "reasons": [
+        "header matches alias “start”",
+        "100% parse as dates"
+      ],
+      "alternatives": [
+        {
+          "source": "Left on",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "end_date",
+      "source": "Left on",
+      "method": "direct",
+      "confidence": 0.922,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 2,
+          "month_first_only": 0,
+          "either": 0
+        }
+      },
+      "reasons": [
+        "header contains alias “left”",
+        "100% parse as dates"
+      ],
+      "alternatives": [
+        {
+          "source": "Start",
+          "confidence": 0.448
+        }
+      ]
+    },
+    {
+      "field": "employment_status",
+      "source": "Status",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “status”",
+        "100% of values are known employment_status values"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "employment_type",
+      "source": "Type",
+      "method": "direct",
+      "confidence": 0.87,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “type”",
+        "100% of values are known employment_type values"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "job_title",
+      "source": "Job",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “job”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Title",
+          "confidence": 0.501
+        },
+        {
+          "source": "Name",
+          "confidence": 0.491
+        }
+      ]
+    },
+    {
+      "field": "department",
+      "source": "Team",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “team”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Name",
+          "confidence": 0.48
+        },
+        {
+          "source": "Country",
+          "confidence": 0.463
+        }
+      ]
+    },
+    {
+      "field": "manager_id",
+      "source": "Manager email",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “manager email”",
+        "values look like ids, emails or names"
+      ],
+      "alternatives": [
+        {
+          "source": "Name",
+          "confidence": 0.5
+        },
+        {
+          "source": "Email",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "location",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": [
+        {
+          "source": "Country",
+          "confidence": 0.471
+        },
+        {
+          "source": "Status",
+          "confidence": 0.463
+        }
+      ]
+    },
+    {
+      "field": "country",
+      "source": "Country",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “country”",
+        "100% are countries"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "salary_amount",
+      "source": "Salary",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "number_style": "eu",
+        "number_style_evidence": {
+          "decimal_comma": 8,
+          "decimal_point": 7,
+          "either": 8
+        }
+      },
+      "reasons": [
+        "header matches alias “salary”",
+        "100% parse as amounts"
+      ],
+      "alternatives": [
+        {
+          "source": "FTE %",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "salary_currency",
+      "source": "Salary",
+      "method": "currency_from_amount",
+      "confidence": 0.83,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "read from the amount column: 77% of salary values carry a currency (EUR)"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "pay_frequency",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": []
+    },
+    {
+      "field": "fte",
+      "source": "FTE %",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "number_style": "eu",
+        "number_style_evidence": {
+          "decimal_comma": 0,
+          "decimal_point": 0,
+          "either": 0
+        }
+      },
+      "reasons": [
+        "header matches alias “fte percent”",
+        "100% look like FTE values or percentages"
+      ],
+      "alternatives": []
+    }
+  ],
+  "held_back": [],
+  "unused": [
+    {
+      "source": "Title",
+      "reason": "closest field is job_title at 0.50, below the 0.55 threshold"
+    },
+    {
+      "source": "Notes",
+      "reason": "closest field is full name at 0.49, below the 0.55 threshold"
+    },
+    {
+      "source": "Previous employer",
+      "reason": "closest field is first_name at 0.48, below the 0.55 threshold"
+    }
+  ]
+}

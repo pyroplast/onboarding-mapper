@@ -1,0 +1,41 @@
+employee_id,first_name,last_name,work_email,personal_email,phone,date_of_birth,start_date,end_date,employment_status,employment_type,job_title,department,manager_id,location,country,salary_amount,salary_currency,pay_frequency,fte
+M0001,Camille,David,camille.david@atelier-lumiere.example,camille16@gmail.com,+33600238786,1989-03-22,2018-03-14,2026-09-15,terminated,full_time,Développeur,Technique,,Paris,FR,38700.00,EUR,,1
+M0002,Jade,Simon,jade.simon@atelier-lumiere.example,jade95@mail.example,+33680025232,1985-07-12,2024-06-16,,active,full_time,Responsable grands comptes,Commercial,M0001,Paris,FR,55600.00,EUR,,1
+M0003,Zoé,Petit,zoe.petit@atelier-lumiere.example,zoe72@mail.example,+33654596753,1991-12-12,2017-11-01,,on_leave,full_time,Chargé de clientèle,Service client,M0001,Paris,FR,32000.00,EUR,,1
+M0004,Tom,Moreau,tom.moreau@atelier-lumiere.example,tom35@gmail.com,+33643173576,1976-01-26,2024-10-27,,active,full_time,Contrôleur de gestion,Finance,M0001,Paris,FR,47300.00,EUR,,1
+M0005,Hugo,Petit,hugo.petit@atelier-lumiere.example,hugo63@personal.example,+33797901729,1974-12-28,2023-01-03,,on_leave,full_time,Chargée RH,RH,M0001,Paris,FR,83600.00,EUR,,1
+M0006,Raphaël,Durand,raphael.durand@atelier-lumiere.example,raphael30@mail.example,+33790933428,1988-10-10,2025-09-06,,active,intern,Responsable technique,Technique,M0001,Paris,FR,14700.00,EUR,,0.5
+M0007,Inès,Fournier,ines.fournier@atelier-lumiere.example,ines27@personal.example,+33769201632,1993-06-05,2023-04-23,,active,full_time,Commercial,Commercial,M0002,Lyon,FR,88800.00,EUR,,1
+M0008,Gabriel,Roux,gabriel.roux@atelier-lumiere.example,gabriel45@personal.example,+33765360763,1981-12-27,2024-01-17,2026-03-15,terminated,full_time,Responsable support,Service client,M0003,Lille,FR,63200.00,EUR,,1
+M0009,Raphaël,Thomas,raphael.thomas@atelier-lumiere.example,raphael35@personal.example,+33760172470,1979-10-23,2026-01-10,,active,full_time,Comptable,Finance,M0004,Paris,FR,70900.00,EUR,,1
+M0010,Gabriel,Durand,gabriel.durand@atelier-lumiere.example,gabriel50@personal.example,+33793058747,1989-04-08,2023-04-27,,active,part_time,Chargée RH,RH,M0005,Lille,FR,66400.00,EUR,,0.8
+M0011,Inès,Roux,ines.roux@atelier-lumiere.example,ines99@gmail.com,+33665418053,1990-01-27,2018-03-01,,active,intern,Développeuse senior,Technique,M0001,Paris,FR,14700.00,EUR,,0.5
+M0012,Gabriel,Simon,gabriel.simon@atelier-lumiere.example,gabriel46@gmail.com,+33777477053,1990-04-18,2016-04-15,,active,full_time,Responsable grands comptes,Commercial,M0002,Paris,FR,60500.00,EUR,,1
+M0013,Margaux,Lefèvre,margaux.lefevre@atelier-lumiere.example,margaux59@gmail.com,+33667628563,1988-04-14,2019-10-29,,active,full_time,Chargé de clientèle,Service client,M0003,Lyon,FR,85000.00,EUR,,1
+M0014,Chloé,Vincent,chloe.vincent@atelier-lumiere.example,chloe22@gmail.com,+33765497651,1976-03-21,2016-12-30,,active,full_time,Contrôleur de gestion,Finance,M0004,Lyon,FR,89800.00,EUR,,1
+M0015,Hugo,Moreau,hugo.moreau@atelier-lumiere.example,hugo42@gmail.com,+33626720495,1992-07-07,2019-04-25,2026-09-24,terminated,full_time,Chargée RH,RH,M0005,Lyon,FR,59400.00,EUR,,1
+M0016,Baptiste,Durand,baptiste.durand@atelier-lumiere.example,baptiste55@personal.example,+33685941922,2001-10-25,2021-01-18,,on_leave,full_time,Développeur,Technique,M0001,Lille,FR,66900.00,EUR,,1
+M0017,Arthur,Richard,arthur.richard@atelier-lumiere.example,arthur45@gmail.com,+33775327423,1972-11-19,2021-01-08,,active,full_time,Commercial,Commercial,M0002,Lyon,FR,50600.00,EUR,,1
+M0018,Manon,Fournier,manon.fournier@atelier-lumiere.example,manon52@gmail.com,+33656648046,1974-02-04,2017-08-23,2026-10-16,terminated,part_time,Responsable support,Service client,M0003,Lyon,FR,26600.00,EUR,,0.6
+M0019,Lina,Moreau,lina.moreau@atelier-lumiere.example,lina28@mail.example,+33639758662,1966-06-03,2019-06-26,,active,full_time,Comptable,Finance,M0004,Paris,FR,49900.00,EUR,,1
+M0020,Camille,Robert,camille.robert@atelier-lumiere.example,camille26@personal.example,+33724753454,2002-11-22,2019-01-06,2026-06-21,terminated,full_time,Chargée RH,RH,M0005,Lille,FR,51100.00,EUR,,1
+M0021,Théo,Vincent,theo.vincent@atelier-lumiere.example,theo65@mail.example,+33689977888,1966-01-15,2018-08-14,,active,full_time,Responsable technique,Technique,M0001,Lille,FR,56000.00,EUR,,1
+M0022,Louis,Lefèvre,louis.lefevre@atelier-lumiere.example,louis89@mail.example,+33773299845,1989-05-03,2018-04-27,,active,full_time,Responsable grands comptes,Commercial,M0002,Lyon,FR,54100.00,EUR,,1
+M0023,Hugo,Martin,hugo.martin@atelier-lumiere.example,hugo17@gmail.com,+33764215529,1966-08-22,2022-04-17,,active,full_time,Chargé de clientèle,Service client,M0003,Lyon,FR,69700.00,EUR,,1
+M0024,Chloé,Leroy,chloe.leroy@atelier-lumiere.example,chloe16@personal.example,+33709680009,1968-11-07,2025-12-28,,active,full_time,Contrôleur de gestion,Finance,M0004,Lille,FR,45400.00,EUR,,1
+M0025,Tom,Dubois,tom.dubois@atelier-lumiere.example,tom8@mail.example,+33659026873,1968-03-11,2026-01-17,,active,part_time,Chargée RH,RH,M0005,Paris,FR,22300.00,EUR,,0.6
+M0026,Margaux,Laurent,margaux.laurent@atelier-lumiere.example,margaux65@personal.example,+33769514758,1979-10-08,2020-12-11,,on_leave,full_time,Développeuse senior,Technique,M0001,Lille,FR,72900.00,EUR,,1
+M0027,Hugo,Lefèvre,hugo.lefevre@atelier-lumiere.example,hugo67@mail.example,+33735935044,1973-06-01,2026-03-16,,active,part_time,Commercial,Commercial,M0002,Lille,FR,30400.00,EUR,,0.5
+M0028,Raphaël,Petit,raphael.petit@atelier-lumiere.example,raphael33@personal.example,+33738710845,1969-12-21,2024-07-23,,active,full_time,Responsable support,Service client,M0003,Lyon,FR,63700.00,EUR,,1
+M0029,Lina,Michel,lina.michel@atelier-lumiere.example,lina11@mail.example,+33651845560,1964-11-20,2020-02-23,,active,full_time,Comptable,Finance,M0004,Lille,FR,87700.00,EUR,,1
+M0030,Margaux,Moreau,margaux.moreau@atelier-lumiere.example,margaux87@personal.example,+33703913616,1991-12-16,2022-03-16,,active,full_time,Chargée RH,RH,M0005,Paris,FR,36100.00,EUR,,1
+M0031,Tom,Richard,tom.richard@atelier-lumiere.example,tom83@mail.example,+33642059156,1998-11-08,2025-09-13,,active,full_time,Développeur,Technique,M0001,Lille,FR,61600.00,EUR,,1
+M0032,Raphaël,Fournier,raphael.fournier@atelier-lumiere.example,raphael89@personal.example,+33628889437,1982-11-01,2018-05-11,,active,full_time,Responsable grands comptes,Commercial,M0002,Paris,FR,66600.00,EUR,,1
+M0033,Lina,Simon,lina.simon@atelier-lumiere.example,lina3@personal.example,+33657044725,1980-09-14,2024-09-22,2026-09-06,terminated,full_time,Chargé de clientèle,Service client,M0003,Lyon,FR,29700.00,EUR,,1
+M0034,Nathan,Durand,nathan.durand@atelier-lumiere.example,nathan69@gmail.com,+33787335499,1985-05-13,2023-10-06,,active,full_time,Contrôleur de gestion,Finance,M0004,Lille,FR,37900.00,EUR,,1
+M0035,Léa,Leroy,lea.leroy@atelier-lumiere.example,lea80@personal.example,+33713056066,2002-03-07,2026-01-08,,active,full_time,Chargée RH,RH,M0005,Paris,FR,76300.00,EUR,,1
+M0036,Gabriel,Vincent,gabriel.vincent@atelier-lumiere.example,gabriel45@mail.example,+33693970686,1972-03-27,2022-10-02,,active,part_time,Responsable technique,Technique,M0001,Lyon,FR,73500.00,EUR,,0.8
+M0037,Lina,Bernard,lina.bernard@atelier-lumiere.example,lina65@gmail.com,+33735609940,1968-06-24,2021-07-13,,active,intern,Commercial,Commercial,M0002,Lyon,FR,14700.00,EUR,,1
+M0038,Arthur,Durand,arthur.durand@atelier-lumiere.example,arthur75@mail.example,+33783219672,1992-04-15,2024-09-11,,active,part_time,Responsable support,Service client,M0003,Lyon,FR,17800.00,EUR,,0.5
+M0039,Léa,Martin,lea.martin@atelier-lumiere.example,lea69@mail.example,+33797657921,1986-04-02,2023-09-16,,active,part_time,Comptable,Finance,M0004,Lille,FR,49700.00,EUR,,0.8
+M0040,Arthur,Bernard,arthur.bernard@atelier-lumiere.example,arthur45@mail.example,+33632616059,1968-12-05,2021-10-27,,active,part_time,Chargée RH,RH,M0005,Lyon,FR,60400.00,EUR,,0.8

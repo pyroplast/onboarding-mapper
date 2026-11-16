@@ -1,0 +1,450 @@
+{
+  "tool": "onboarding-mapper",
+  "version": "0.1.0",
+  "schema": {
+    "name": "employee",
+    "version": "1",
+    "sha256": "edd3951f7a2d20c261dd78977b382e2a373038ea5598433324b29fd824f4a6e0"
+  },
+  "source": {
+    "fingerprint": "70fcdf1af63db722",
+    "headers": [
+      "Employee #",
+      "First Name",
+      "Last Name",
+      "Work Email",
+      "Home Email",
+      "Mobile Phone",
+      "Date of Birth",
+      "Hire Date",
+      "Termination Date",
+      "Status",
+      "Employment Status",
+      "Job Title",
+      "Department",
+      "Reports To",
+      "Location",
+      "Country",
+      "Pay Rate",
+      "Pay Per",
+      "SSN",
+      "Emergency Contact Phone",
+      "Last Modified"
+    ]
+  },
+  "how_to_edit": "Set a field's status to 'accepted' or 'rejected', or change its 'source' to another header and set status 'accepted'. Options such as date_order ('dmy'/'mdy') and number_style ('eu'/'us') can be changed too. Then run: omap apply <export> --mapping <this file>.",
+  "fields": [
+    {
+      "field": "employee_id",
+      "source": "Employee #",
+      "method": "direct",
+      "confidence": 0.994,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “employee number”",
+        "98% unique, 100% id-shaped"
+      ],
+      "alternatives": [
+        {
+          "source": "Pay Rate",
+          "confidence": 0.3
+        }
+      ]
+    },
+    {
+      "field": "first_name",
+      "source": "First Name",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "name_order": "first_last"
+      },
+      "reasons": [
+        "header matches alias “first name”",
+        "100% of values look like names"
+      ],
+      "alternatives": [
+        {
+          "source": "Last Name",
+          "confidence": 0.5
+        },
+        {
+          "source": "Status",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "last_name",
+      "source": "Last Name",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "name_order": "first_last"
+      },
+      "reasons": [
+        "header matches alias “last name”",
+        "100% of values look like names"
+      ],
+      "alternatives": [
+        {
+          "source": "First Name",
+          "confidence": 0.75
+        },
+        {
+          "source": "Status",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "work_email",
+      "source": "Work Email",
+      "method": "direct",
+      "confidence": 0.994,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “work email”",
+        "98% valid emails, 100% share one domain"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "personal_email",
+      "source": "Home Email",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “home email”",
+        "100% valid emails, 100% on free-mail domains"
+      ],
+      "alternatives": [
+        {
+          "source": "Work Email",
+          "confidence": 0.341
+        }
+      ]
+    },
+    {
+      "field": "phone",
+      "source": "Mobile Phone",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “mobile phone”",
+        "100% look like phone numbers"
+      ],
+      "alternatives": [
+        {
+          "source": "Emergency Contact Phone",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "date_of_birth",
+      "source": "Date of Birth",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "mdy",
+        "date_order_evidence": {
+          "day_first_only": 0,
+          "month_first_only": 38,
+          "either": 23
+        }
+      },
+      "reasons": [
+        "header matches alias “date of birth”",
+        "100% parse as dates"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "start_date",
+      "source": "Hire Date",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "mdy",
+        "date_order_evidence": {
+          "day_first_only": 0,
+          "month_first_only": 36,
+          "either": 21
+        }
+      },
+      "reasons": [
+        "header matches alias “hire date”",
+        "100% parse as dates"
+      ],
+      "alternatives": [
+        {
+          "source": "Date of Birth",
+          "confidence": 0.5
+        },
+        {
+          "source": "Termination Date",
+          "confidence": 0.494
+        }
+      ]
+    },
+    {
+      "field": "end_date",
+      "source": "Termination Date",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "mdy",
+        "date_order_evidence": {
+          "day_first_only": 0,
+          "month_first_only": 6,
+          "either": 4
+        }
+      },
+      "reasons": [
+        "header matches alias “termination date”",
+        "100% parse as dates"
+      ],
+      "alternatives": [
+        {
+          "source": "Date of Birth",
+          "confidence": 0.458
+        },
+        {
+          "source": "Hire Date",
+          "confidence": 0.458
+        }
+      ]
+    },
+    {
+      "field": "employment_status",
+      "source": "Status",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “status”",
+        "100% of values are known employment_status values"
+      ],
+      "alternatives": [
+        {
+          "source": "Employment Status",
+          "confidence": 0.487
+        }
+      ]
+    },
+    {
+      "field": "employment_type",
+      "source": "Employment Status",
+      "method": "direct",
+      "confidence": 0.644,
+      "status": "review",
+      "options": {},
+      "reasons": [
+        "header resembles alias “employment type”",
+        "100% of values are known employment_type values"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "job_title",
+      "source": "Job Title",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “job title”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Location",
+          "confidence": 0.5
+        },
+        {
+          "source": "Reports To",
+          "confidence": 0.463
+        }
+      ]
+    },
+    {
+      "field": "department",
+      "source": "Department",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “department”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Location",
+          "confidence": 0.472
+        },
+        {
+          "source": "Reports To",
+          "confidence": 0.463
+        }
+      ]
+    },
+    {
+      "field": "manager_id",
+      "source": "Reports To",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “reports to”",
+        "values look like ids, emails or names"
+      ],
+      "alternatives": [
+        {
+          "source": "Employee #",
+          "confidence": 0.5
+        },
+        {
+          "source": "Work Email",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "location",
+      "source": "Location",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “location”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Country",
+          "confidence": 0.471
+        },
+        {
+          "source": "Status",
+          "confidence": 0.463
+        }
+      ]
+    },
+    {
+      "field": "country",
+      "source": "Country",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “country”",
+        "100% are countries"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "salary_amount",
+      "source": "Pay Rate",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "number_style": "us",
+        "number_style_evidence": {
+          "decimal_comma": 0,
+          "decimal_point": 61,
+          "either": 0
+        }
+      },
+      "reasons": [
+        "header matches alias “pay rate”",
+        "100% parse as amounts"
+      ],
+      "alternatives": [
+        {
+          "source": "Employee #",
+          "confidence": 0.5
+        },
+        {
+          "source": "Pay Per",
+          "confidence": 0.429
+        }
+      ]
+    },
+    {
+      "field": "salary_currency",
+      "source": "Pay Rate",
+      "method": "currency_from_amount",
+      "confidence": 0.9,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "read from the amount column: 100% of salary values carry a currency (USD)"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "pay_frequency",
+      "source": "Pay Per",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “pay per”",
+        "100% of values are known pay_frequency values"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "fte",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": [
+        {
+          "source": "Employee #",
+          "confidence": 0.5
+        }
+      ]
+    }
+  ],
+  "held_back": [
+    {
+      "source": "SSN",
+      "category": "government_id",
+      "label": "government ID number",
+      "reason": "header “SSN”"
+    }
+  ],
+  "unused": [
+    {
+      "source": "Emergency Contact Phone",
+      "reason": "closest field is phone at 0.50, below the 0.55 threshold"
+    },
+    {
+      "source": "Last Modified",
+      "reason": "closest field is start_date at 0.49, below the 0.55 threshold"
+    }
+  ]
+}

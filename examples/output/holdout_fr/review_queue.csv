@@ -1,0 +1,3 @@
+id,kind,severity,code,field,source,row,value,problem,suggestion,decision
+R0001,privacy,warning,SENSITIVE_HELD_BACK,,N° de sécurité sociale,,,looks like government ID number (header “N° de sécurité sociale”); not read into any output,"confirm it should not be imported, and agree how it is transferred if it must be",
+R0002,privacy,warning,SENSITIVE_HELD_BACK,,RIB,,,looks like bank account detail (header “RIB”); not read into any output,"confirm it should not be imported, and agree how it is transferred if it must be",

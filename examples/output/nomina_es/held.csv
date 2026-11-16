@@ -1,0 +1,2 @@
+_source_row,_errors,employee_id,first_name,last_name,work_email,personal_email,phone,date_of_birth,start_date,end_date,employment_status,employment_type,job_title,department,manager_id,location,country,salary_amount,salary_currency,pay_frequency,fte
+48,end_date: end_date is before start_date,E00044,Pablo,Gómez Fernández,pablo.gomez@lumen-iberia.example,,+34715682326,1993-10-23,2026-05-11,2026-02-10,terminated,full_time,Administrativo,Administración,E00004,Madrid,,39300.00,,,1

@@ -1,0 +1,35 @@
+﻿BrightPath — staff list (KEEP UPDATED!!)
+owner: ops@brightpath.example,,last edit: Sept
+Title,Name,Email,Job,Team,Manager email,Start,Left on,Status,Type,FTE %,Salary,Country,,Notes,Previous employer
+Dr,Mia Hill,Mia Hill <mia.hill@brightpath.example>,Software Engineer,Engineering,,2022-08-14,,active,FT,100%,"73.300,00 €",IE,,visa renewal,
+,Liam Wilson,liam.wilson@brightpath.example,Sales Development Rep,Sales,mia.hill@brightpath.example,23 May 2023,,active,Freelance,100%,"€62,000",PT,,laptop pending,Umbrella
+Dr,Zoe Adams,zoe.adams@brightpath.example,Customer Success Manager,Customer Success,mia.hill@brightpath.example,30/04/2020,,Active,Full time,100%,95.3k,PT,,visa renewal,Umbrella
+Dr,Nora Baker,Nora Baker <nora.baker@brightpath.example>,Controller,Finance,mia.hill@brightpath.example,2022-11-28,2026-04-07,leaver,Part time,50%,38600 EUR,NL,,,Umbrella
+Mr,Hannah Nelson,hannah.nelson@brightpath.example,HR Business Partner,People,mia.hill@brightpath.example,16 Feb 2016,,active,FT,100%,"56.200,00 €",PT,,visa renewal,
+Mr,Mia Young,mia.young@brightpath.example,Senior Software Engineer,Engineering,mia.hill@brightpath.example,15/11/2023,,current,PT,80%,"€28,000",NL,,,Umbrella
+Mr,Olivia Smith,Olivia Smith <olivia.smith@brightpath.example>,Account Executive,Sales,liam.wilson@brightpath.example,2023-12-14,,active,Full time,100%,88.2k,ES,,,Umbrella
+,Mia Allen,mia.allen@brightpath.example,Support Specialist,Customer Success,zoe.adams@brightpath.example,1 Mar 2019,31 May 2026,leaver,Freelance,100%,65200 EUR,PT,,,Globex
+Mr,Ava Walker,ava.walker@brightpath.example,Financial Analyst,Finance,nora.baker@brightpath.example,18/09/2017,,Active,FT,100%,"67.100,00 €",IE,,,Globex
+Dr,Zoe Nelson,Zoe Nelson <zoe.nelson@brightpath.example>,Recruiter,People,hannah.nelson@brightpath.example,2026-05-28,,active,FT,100%,"€95,600",PT,,,Umbrella
+Mr,Emma Wilson,emma.wilson@brightpath.example,Engineering Manager,Engineering,mia.hill@brightpath.example,1 Feb 2024,,Active,Freelance,100%,58.2k,PT,,,Globex
+,Noah Smith,noah.smith@brightpath.example,Sales Manager,Sales,liam.wilson@brightpath.example,20/09/2019,,active,FT,100%,37300 EUR,PT,,,
+,Nora Allen,Nora Allen <nora.allen@brightpath.example>,Customer Success Manager,Customer Success,zoe.adams@brightpath.example,2023-03-29,,current,Full time,100%,"47.400,00 €",IE,,,Initech
+Mr,Owen Johnson,owen.johnson@brightpath.example,Controller,Finance,nora.baker@brightpath.example,4 Mar 2026,,current,Full time,100%,"€66,800",IE,,,Umbrella
+Ms,Leah Walker,leah.walker@brightpath.example,HR Business Partner,People,hannah.nelson@brightpath.example,24/07/2021,,active,Full time,100%,86.4k,NL,,visa renewal,
+Ms,Owen Wilson,Owen Wilson <owen.wilson@brightpath.example>,QA Engineer,Engineering,mia.hill@brightpath.example,2022-12-09,2026-03-10,leaver,PT,60%,54700 EUR,IE,,,Initech
+,Liam Clark,liam.clark@brightpath.example,Sales Development Rep,Sales,liam.wilson@brightpath.example,11 Jul 2019,,Active,Freelance,100%,"76.800,00 €",IE,,,Initech
+Ms,Owen Miller,owen.miller@brightpath.example,Support Specialist,Customer Success,zoe.adams@brightpath.example,10/09/2025,,Active,FT,100%,"€43,400",IE,,visa renewal,Umbrella
+,James Walker,James Walker <james.walker@brightpath.example>,Financial Analyst,Finance,nora.baker@brightpath.example,2017-10-01,,active,Full time,100%,63.7k,IE,,visa renewal,
+Mr,Mia Brown,mia.brown@brightpath.example,Recruiter,People,hannah.nelson@brightpath.example,11 Mar 2017,,active,FT,100%,98400 EUR,IE,,,Initech
+Ms,Chloe Green,chloe.green@brightpath.example,Software Engineer,Engineering,mia.hill@brightpath.example,09/09/2026,,current,Full time,100%,"61.700,00 €",IE,,,Initech
+,Chloe King,Chloe King <chloe.king@brightpath.example>,Account Executive,Sales,liam.wilson@brightpath.example,2023-06-15,,active,FT,100%,"€81,600",ES,,,Initech
+,Noah Allen,noah.allen@brightpath.example,Customer Success Manager,Customer Success,zoe.adams@brightpath.example,18 Jul 2020,,Active,Full time,100%,41.3k,IE,,visa renewal,
+,Nora Adams,nora.adams@brightpath.example,Controller,Finance,nora.baker@brightpath.example,30/12/2023,,Active,Full time,100%,69500 EUR,NL,,laptop pending,Globex
+Ms,Ryan Campbell,Ryan Campbell <ryan.campbell@brightpath.example>,HR Business Partner,People,hannah.nelson@brightpath.example,2017-02-16,,active,Full time,100%,"60.200,00 €",IE,,laptop pending,Initech
+Dr,James Campbell,james.campbell@brightpath.example,Senior Software Engineer,Engineering,mia.hill@brightpath.example,13 Aug 2018,,active,Full time,100%,"€47,900",ES,,laptop pending,Globex
+Ms,Chloe Campbell,chloe.campbell@brightpath.example,Sales Manager,Sales,liam.wilson@brightpath.example,03/02/2021,22/05/2026,Left,FT,100%,39.4k,PT,,,Globex
+Dr,Zoe Brown,Zoe Brown <zoe.brown@brightpath.example>,Support Specialist,Customer Success,zoe.adams@brightpath.example,2018-11-07,,Active,FT,100%,80300 EUR,ES,,laptop pending,
+Dr,Isaac King,isaac.king@brightpath.example,Financial Analyst,Finance,nora.baker@brightpath.example,4 Apr 2024,,active,FT,100%,"45.100,00 €",NL,,visa renewal,Initech
+Dr,Ava Johnson,ava.johnson@brightpath.example,Recruiter,People,hannah.nelson@brightpath.example,31/03/2022,16/10/2026,Left,Full time,100%,"€69,100",PT,,,Umbrella
+,,,,,,,,,,,,,,,
+TOTAL,30

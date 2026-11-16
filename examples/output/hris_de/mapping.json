@@ -1,0 +1,456 @@
+{
+  "tool": "onboarding-mapper",
+  "version": "0.1.0",
+  "schema": {
+    "name": "employee",
+    "version": "1",
+    "sha256": "edd3951f7a2d20c261dd78977b382e2a373038ea5598433324b29fd824f4a6e0"
+  },
+  "source": {
+    "fingerprint": "60b9e1e90fa78933",
+    "headers": [
+      "Personalnummer",
+      "Vorname",
+      "Nachname",
+      "E-Mail",
+      "Private E-Mail",
+      "Handynummer",
+      "Geburtsdatum",
+      "Eintrittsdatum",
+      "Austrittsdatum",
+      "Status",
+      "Beschäftigungsart",
+      "Position",
+      "Abteilung",
+      "Vorgesetzter",
+      "Standort",
+      "Land",
+      "Jahresgehalt",
+      "Wochenstunden",
+      "Steuer-ID",
+      "Konfession"
+    ]
+  },
+  "how_to_edit": "Set a field's status to 'accepted' or 'rejected', or change its 'source' to another header and set status 'accepted'. Options such as date_order ('dmy'/'mdy') and number_style ('eu'/'us') can be changed too. Then run: omap apply <export> --mapping <this file>.",
+  "fields": [
+    {
+      "field": "employee_id",
+      "source": "Personalnummer",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “personalnummer”",
+        "100% unique, 100% id-shaped"
+      ],
+      "alternatives": [
+        {
+          "source": "Handynummer",
+          "confidence": 0.34
+        }
+      ]
+    },
+    {
+      "field": "first_name",
+      "source": "Vorname",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "name_order": "first_last"
+      },
+      "reasons": [
+        "header matches alias “vorname”",
+        "100% of values look like names"
+      ],
+      "alternatives": [
+        {
+          "source": "Nachname",
+          "confidence": 0.5
+        },
+        {
+          "source": "Status",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "last_name",
+      "source": "Nachname",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "name_order": "first_last"
+      },
+      "reasons": [
+        "header matches alias “nachname”",
+        "100% of values look like names"
+      ],
+      "alternatives": [
+        {
+          "source": "Vorname",
+          "confidence": 0.5
+        },
+        {
+          "source": "Status",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "work_email",
+      "source": "E-Mail",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “email”",
+        "100% valid emails, 100% share one domain"
+      ],
+      "alternatives": [
+        {
+          "source": "Private E-Mail",
+          "confidence": 0.697
+        },
+        {
+          "source": "Vorgesetzter",
+          "confidence": 0.625
+        }
+      ]
+    },
+    {
+      "field": "personal_email",
+      "source": "Private E-Mail",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “private email”",
+        "100% valid emails, 100% on free-mail domains"
+      ],
+      "alternatives": [
+        {
+          "source": "E-Mail",
+          "confidence": 0.354
+        }
+      ]
+    },
+    {
+      "field": "phone",
+      "source": "Handynummer",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “handynummer”",
+        "100% look like phone numbers"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "date_of_birth",
+      "source": "Geburtsdatum",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 0,
+          "month_first_only": 0,
+          "either": 0
+        }
+      },
+      "reasons": [
+        "header matches alias “geburtsdatum”",
+        "100% parse as dates"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "start_date",
+      "source": "Eintrittsdatum",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 0,
+          "month_first_only": 0,
+          "either": 0
+        }
+      },
+      "reasons": [
+        "header matches alias “eintrittsdatum”",
+        "100% parse as dates"
+      ],
+      "alternatives": [
+        {
+          "source": "Geburtsdatum",
+          "confidence": 0.5
+        },
+        {
+          "source": "Austrittsdatum",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "end_date",
+      "source": "Austrittsdatum",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "date_order": "dmy",
+        "date_order_evidence": {
+          "day_first_only": 0,
+          "month_first_only": 0,
+          "either": 0
+        }
+      },
+      "reasons": [
+        "header matches alias “austrittsdatum”",
+        "100% parse as dates"
+      ],
+      "alternatives": [
+        {
+          "source": "Eintrittsdatum",
+          "confidence": 0.479
+        },
+        {
+          "source": "Geburtsdatum",
+          "confidence": 0.462
+        }
+      ]
+    },
+    {
+      "field": "employment_status",
+      "source": "Status",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “status”",
+        "100% of values are known employment_status values"
+      ],
+      "alternatives": [
+        {
+          "source": "Beschäftigungsart",
+          "confidence": 0.38
+        }
+      ]
+    },
+    {
+      "field": "employment_type",
+      "source": "Beschäftigungsart",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “beschaftigungsart”",
+        "100% of values are known employment_type values"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "job_title",
+      "source": "Position",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “position”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Vorname",
+          "confidence": 0.489
+        },
+        {
+          "source": "Nachname",
+          "confidence": 0.456
+        }
+      ]
+    },
+    {
+      "field": "department",
+      "source": "Abteilung",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “abteilung”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Position",
+          "confidence": 0.466
+        },
+        {
+          "source": "Vorname",
+          "confidence": 0.446
+        }
+      ]
+    },
+    {
+      "field": "manager_id",
+      "source": "Vorgesetzter",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “vorgesetzter”",
+        "values look like ids, emails or names"
+      ],
+      "alternatives": [
+        {
+          "source": "Personalnummer",
+          "confidence": 0.5
+        },
+        {
+          "source": "E-Mail",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "location",
+      "source": "Standort",
+      "method": "direct",
+      "confidence": 0.93,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “standort”",
+        "free text"
+      ],
+      "alternatives": [
+        {
+          "source": "Position",
+          "confidence": 0.472
+        },
+        {
+          "source": "Status",
+          "confidence": 0.463
+        }
+      ]
+    },
+    {
+      "field": "country",
+      "source": "Land",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "header matches alias “land”",
+        "100% are countries"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "salary_amount",
+      "source": "Jahresgehalt",
+      "method": "direct",
+      "confidence": 1.0,
+      "status": "auto",
+      "options": {
+        "number_style": "eu",
+        "number_style_evidence": {
+          "decimal_comma": 0,
+          "decimal_point": 0,
+          "either": 50
+        }
+      },
+      "reasons": [
+        "header matches alias “jahresgehalt”",
+        "100% parse as amounts"
+      ],
+      "alternatives": [
+        {
+          "source": "Personalnummer",
+          "confidence": 0.5
+        },
+        {
+          "source": "Handynummer",
+          "confidence": 0.5
+        }
+      ]
+    },
+    {
+      "field": "salary_currency",
+      "source": "Jahresgehalt",
+      "method": "currency_from_amount",
+      "confidence": 0.9,
+      "status": "auto",
+      "options": {},
+      "reasons": [
+        "read from the amount column: 100% of salary values carry a currency (EUR)"
+      ],
+      "alternatives": []
+    },
+    {
+      "field": "pay_frequency",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": []
+    },
+    {
+      "field": "fte",
+      "source": null,
+      "method": "direct",
+      "confidence": 0.0,
+      "status": "unmapped",
+      "options": {},
+      "reasons": [],
+      "alternatives": [
+        {
+          "source": "Wochenstunden",
+          "confidence": 0.5
+        },
+        {
+          "source": "Beschäftigungsart",
+          "confidence": 0.376
+        }
+      ]
+    }
+  ],
+  "held_back": [
+    {
+      "source": "Steuer-ID",
+      "category": "government_id",
+      "label": "government ID number",
+      "reason": "header “Steuer-ID”"
+    },
+    {
+      "source": "Konfession",
+      "category": "special_category",
+      "label": "special-category personal data",
+      "reason": "header “Konfession”"
+    }
+  ],
+  "unused": [
+    {
+      "source": "Wochenstunden",
+      "reason": "closest field is manager_id at 0.50, below the 0.55 threshold"
+    }
+  ]
+}

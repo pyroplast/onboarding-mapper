@@ -1,0 +1,3 @@
+id,kind,severity,code,field,source,row,value,problem,suggestion,decision
+R0001,mapping,error,UNMAPPED_REQUIRED,employee_id,,,,required field has no source column; every record is held,pick a source column or ask the customer for this data. Closest candidates: Salary (0.34); Name (0.30),
+R0002,mapping,warning,REF_KEY_UNMAPPED,manager_id,Manager email,,,manager_id cannot be resolved: employee_id has no source column,map employee_id first; the column is kept in the mapping,

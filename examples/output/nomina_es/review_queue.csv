@@ -1,0 +1,6 @@
+id,kind,severity,code,field,source,row,value,problem,suggestion,decision
+R0001,record,error,END_BEFORE_START,end_date,,48,,end_date is before start_date,,
+R0002,privacy,warning,SENSITIVE_HELD_BACK,,DNI/NIE,,,looks like government ID number (header “DNI/NIE”); not read into any output,"confirm it should not be imported, and agree how it is transferred if it must be",
+R0003,privacy,warning,SENSITIVE_HELD_BACK,,IBAN,,,looks like bank account detail (header “IBAN”); not read into any output,"confirm it should not be imported, and agree how it is transferred if it must be",
+R0004,record,warning,SALARY_WITHOUT_CURRENCY,salary_currency,,,,"45 rows: salary_amount has no salary_currency (rows 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 and 33 more)",,
+R0005,value,warning,NUMBER_OUTLIER,salary_amount,Salario bruto anual,35,"2.178,57",0.055× the column median (39900),"check for a missing or extra digit, a monthly figure in an annual column, or a different currency",
