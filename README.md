@@ -167,6 +167,7 @@ schema is a JSON file: field types, required/unique flags, extra aliases and enu
 make test     # 167 tests, about 5 s, all offline
 make bench    # mapping/cell/issue scores against ground truth
 make speed    # the timing table above
+make visual   # docs/ground_truth.html: every output cell vs the truth, colour-coded
 ```
 
 The suite covers the parsers (dates in four languages, both decimal conventions, E.164 phones, IBAN and DNI

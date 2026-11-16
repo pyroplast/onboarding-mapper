@@ -1,4 +1,4 @@
-.PHONY: install test lint bench speed examples demo docker docker-test
+.PHONY: install test lint bench speed visual examples demo docker docker-test
 
 install:
 	pip install -e ".[dev]"
@@ -14,6 +14,9 @@ bench:
 
 speed:
 	python bench/speed.py
+
+visual:
+	python bench/visual.py
 
 examples:
 	python examples/generate.py
