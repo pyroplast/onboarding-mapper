@@ -470,10 +470,12 @@ def _xlsx(rows: list[list], date_cols: set[int]) -> bytes:
         "xl/worksheets/sheet1.xml": "".join(sheet),
     }
     buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+    # Stored, not deflated: deflate output differs between zlib builds, and the
+    # fixture must be byte-identical everywhere.
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_STORED) as z:
         for name in sorted(files):
             info = zipfile.ZipInfo(name, date_time=(2026, 11, 16, 0, 0, 0))
-            info.compress_type = zipfile.ZIP_DEFLATED
+            info.compress_type = zipfile.ZIP_STORED
             z.writestr(info, files[name])
     return buf.getvalue()
 
