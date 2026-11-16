@@ -51,12 +51,13 @@ def held_csv(run: Run) -> str:
     return _csv(rows)
 
 
-def review_csv(run: Run) -> str:
+def review_csv(run: Run, decisions: dict[str, str] | None = None) -> str:
     cols = ["id", "kind", "severity", "code", "field", "source", "row", "value", "problem", "suggestion", "decision"]
     rows = [cols]
+    decisions = decisions or {}
     for item in run.review:
         d = item.to_dict()
-        rows.append([str(d[c]) for c in cols[:-1]] + [""])
+        rows.append([str(d[c]) for c in cols[:-1]] + [decisions.get(item.key, "")])
     return _csv(rows)
 
 

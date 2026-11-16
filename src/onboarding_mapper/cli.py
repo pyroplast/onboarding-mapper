@@ -4,6 +4,7 @@
     omap apply EXPORT --mapping out/mapping.json [--out]   re-run with a reviewed mapping
     omap profile EXPORT                                     show what each column looks like
     omap schema [NAME|FILE]                                 list or show target schemas
+    omap ui [--port 8765]                                   the client panel in the browser (local only)
 
 Exit codes: 0 every record is ready, 1 some records are held or need review
 (with --strict), 2 the run could not complete.
@@ -69,6 +70,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_schema = sub.add_parser("schema", help="list built-in schemas or print one")
     p_schema.add_argument("name", nargs="?")
+
+    p_ui = sub.add_parser("ui", help="open the client panel in the browser (runs on this computer only)")
+    p_ui.add_argument("--port", type=int, default=8765)
+    p_ui.add_argument("--no-browser", action="store_true", help="do not open a browser window")
     return parser
 
 
@@ -82,6 +87,11 @@ def main(argv: list[str] | None = None) -> int:
             return _profile(args)
         if args.command == "schema":
             return _schema(args)
+        if args.command == "ui":
+            from . import server
+
+            server.serve(port=args.port, open_browser=not args.no_browser)
+            return 0
     except (ingest.IngestError, schema.SchemaError, engine.MappingError, argparse.ArgumentTypeError) as exc:
         print(f"omap: {exc}", file=sys.stderr)
         return 2

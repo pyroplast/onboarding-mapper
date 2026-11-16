@@ -23,7 +23,7 @@ onboarding-mapper = "onboarding_mapper.cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-onboarding_mapper = ["schemas/*.json"]
+onboarding_mapper = ["schemas/*.json", "ui.html"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

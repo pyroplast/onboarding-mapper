@@ -36,9 +36,15 @@ class ReviewItem:
     suggestion: str
     code: str
 
+    @property
+    def key(self) -> str:
+        """Stays the same across re-runs, unlike the R-number, so decisions survive mapping edits."""
+        return f"{self.code}|{self.field}|{self.source}|{self.row if self.row is not None else ''}"
+
     def to_dict(self) -> dict:
         return {
             "id": self.id,
+            "key": self.key,
             "kind": self.kind,
             "severity": self.severity,
             "code": self.code,
@@ -130,6 +136,11 @@ def load_mapping(path: str | Path, table: Table, schema: Schema) -> Proposal:
         raw = json.loads(Path(path).read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise MappingError(f"cannot read mapping file: {exc}") from exc
+    return mapping_from_dict(raw, table, schema)
+
+
+def mapping_from_dict(raw: dict, table: Table, schema: Schema) -> Proposal:
+    """Build a proposal from a mapping document (the shape mapping.json has)."""
     if raw.get("schema", {}).get("name") != schema.name:
         raise MappingError(f"mapping was made for schema '{raw.get('schema', {}).get('name')}', not '{schema.name}'")
     headers = {h: i for i, h in enumerate(table.headers)}
@@ -360,6 +371,7 @@ def run(
     as_of: date | None = None,
     default_country: str | None = None,
     table: Table | None = None,
+    proposal: Proposal | None = None,
 ) -> Run:
     as_of = as_of or date.today()
     t0 = time.perf_counter()
@@ -367,7 +379,9 @@ def run(
     t1 = time.perf_counter()
     enum_maps = {f.name: f.enum_map for f in schema.fields if f.type == "enum"}
     profiles = profile.profile_table(table, enum_maps)
-    if mapping_path:
+    if proposal is not None:
+        source = "edited"
+    elif mapping_path:
         proposal = load_mapping(mapping_path, table, schema)
         source = str(mapping_path)
     else:
@@ -390,4 +404,4 @@ def run(
     )
 
 
-__all__ = ["Run", "ReviewItem", "MappingError", "run", "load_mapping", "mapping_to_dict", "Issue"]
+__all__ = ["Run", "ReviewItem", "MappingError", "run", "load_mapping", "mapping_from_dict", "mapping_to_dict", "Issue"]

@@ -23,6 +23,29 @@ byte-identical output. Runtime dependencies: none (Python 3.10+ standard library
 
 ![Mapping report for a Spanish payroll export](docs/report_nomina_es.png)
 
+## The client panel
+
+```bash
+omap ui        # opens http://127.0.0.1:8765 in your browser
+```
+
+A local web app for the person who owns the data: drop the export (or pick a sample), check the proposed mapping,
+change any column from a drop-down, work through the decisions, and download the clean file. It runs on
+`127.0.0.1` with the standard library only. The file goes from the browser to this process and nowhere else, and
+requests from other web pages are refused.
+
+| Field mapping | Needs your decision | Data preview |
+|---|---|---|
+| ![Mapping](docs/panel_mapping.png) | ![Review](docs/panel_review.png) | ![Preview](docs/panel_preview.png) |
+
+- **Field mapping:** every target field, the column it comes from, confidence, status and the reason. Change the
+  column, confirm, or exclude, and everything re-checks at once. Date order and decimal style can be switched per column.
+- **Needs your decision:** each open item with *Accept as is*, *Customer will fix* or *Ignore*. Decisions go into the
+  downloaded `review_queue.csv`.
+- **Data preview:** output cells with the old value struck through, warnings in amber, errors in red, held rows in grey.
+- **Source file:** encoding, delimiter, header row, and what each column looks like. Sensitive columns show no values.
+- **Download:** `mapped.csv`, `held.csv`, `review_queue.csv`, `mapping.json` (reusable next month), `report.html`.
+
 ## Results
 
 All numbers below come from `python bench/evaluate.py` and `python bench/speed.py` in this repo. The data is synthetic,
@@ -164,10 +187,11 @@ schema is a JSON file: field types, required/unique flags, extra aliases and enu
 ## Tests
 
 ```bash
-make test     # 167 tests, about 5 s, all offline
+make test     # 171 tests, about 6 s, all offline
 make bench    # mapping/cell/issue scores against ground truth
 make speed    # the timing table above
 make visual   # docs/ground_truth.html: every output cell vs the truth, colour-coded
+make ui       # the client panel
 ```
 
 The suite covers the parsers (dates in four languages, both decimal conventions, E.164 phones, IBAN and DNI
@@ -202,6 +226,7 @@ src/onboarding_mapper/
   apply.py     cell transforms, record rules, manager resolution
   engine.py    a run end to end, mapping file, review queue
   report.py    CSV/JSON/Markdown/HTML outputs
+  server.py    the client panel (local HTTP, stdlib only) and ui.html
   synth.py     synthetic exports with ground truth
 bench/         evaluate.py, speed.py, HOLDOUT_FIRST_RUN.md
 examples/      exports, truth and full outputs for each fixture

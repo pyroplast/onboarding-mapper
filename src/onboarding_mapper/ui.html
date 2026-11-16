@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Onboarding Mapper</title>
+<style>
+:root{
+  --bg:#f4f3ef;--panel:#ffffff;--ink:#17181a;--muted:#686b70;--faint:#9a9da2;--line:#e4e2dc;--soft:#f7f6f2;--code:#efede7;
+  --acc:#24527a;--acc-ink:#fff;--acc-soft:#e6eef6;
+  --ok:#0e6b45;--ok-bg:#e1f2e8;--warn:#8c4c05;--warn-bg:#fcefd6;--err:#b3261e;--err-bg:#fbe5e2;--held:#efeeea;
+  --r:12px;--shadow:0 1px 2px rgba(20,20,20,.04),0 4px 16px rgba(20,20,20,.04);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121315;--panel:#1b1d20;--ink:#ecebe6;--muted:#a2a5aa;--faint:#74777c;--line:#2d3034;--soft:#202327;--code:#25282c;
+  --acc:#8bb6e3;--acc-ink:#0f1a26;--acc-soft:#1d2a38;
+  --ok:#73d3a2;--ok-bg:#12301f;--warn:#f0b65e;--warn-bg:#382910;--err:#ff8b7d;--err-bg:#3b1c18;--held:#24262a;--shadow:none}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+button,select,input{font:inherit;color:inherit}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px}
+code{background:var(--code);padding:1px 6px;border-radius:5px}
+.hidden{display:none!important}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .in{max-width:1360px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;letter-spacing:-.01em;font-size:15px}
+.brand .mark{width:26px;height:26px;border-radius:7px;background:var(--acc);display:grid;place-items:center;color:var(--acc-ink);font-size:13px;font-weight:800}
+.brand small{color:var(--faint);font-weight:500;margin-left:2px}
+.spacer{flex:1}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);padding:6px 12px;border-radius:999px;font-size:13px;max-width:420px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.btn{border:1px solid var(--line);background:var(--panel);padding:8px 14px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.btn:hover{border-color:var(--faint)}
+.btn.primary{background:var(--acc);border-color:var(--acc);color:var(--acc-ink);font-weight:600}
+.btn.small{padding:4px 10px;font-size:12.5px;border-radius:7px}
+.btn.ghost{background:transparent}
+.btn[disabled]{opacity:.45;cursor:default}
+.menu{position:relative}
+.menu .pop{position:absolute;right:0;top:calc(100% + 6px);background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.12);padding:6px;min-width:280px;z-index:30}
+.menu .pop a{display:flex;flex-direction:column;padding:8px 10px;border-radius:7px;color:inherit;text-decoration:none}
+.menu .pop a:hover{background:var(--soft)}
+.menu .pop a span{font-size:12px;color:var(--muted)}
+
+main{max-width:1360px;margin:0 auto;padding:26px 24px 80px}
+
+/* start screen */
+.hero{max-width:880px;margin:30px auto 0}
+.hero h1{font-size:32px;letter-spacing:-.02em;margin:0 0 8px;line-height:1.15}
+.hero p.lead{color:var(--muted);font-size:16px;margin:0 0 24px;max-width:680px}
+.drop{display:block;background:var(--panel);border:2px dashed var(--line);border-radius:16px;padding:38px 24px;text-align:center;cursor:pointer;transition:.15s;box-shadow:var(--shadow)}
+.drop:hover,.drop.over{border-color:var(--acc);background:var(--acc-soft)}
+.drop b{display:block;font-size:17px;margin-bottom:6px}
+.drop span{color:var(--muted)}
+.settings{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0 6px;align-items:end}
+.settings label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted)}
+.settings select,.settings input{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px 10px;min-width:170px}
+.privacy{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px;margin:14px 0 30px}
+.privacy::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok)}
+h3.sec{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:600}
+.samples{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.sample{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;cursor:pointer;text-align:left;transition:.12s}
+.sample:hover{border-color:var(--acc);transform:translateY(-1px)}
+.sample b{display:block;font-family:ui-monospace,Menlo,monospace;font-size:13px;margin-bottom:5px}
+.sample span{font-size:12.5px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+
+/* workspace */
+.headline{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.headline h2{margin:0;font-size:24px;letter-spacing:-.015em}
+.headline .meta{color:var(--muted);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow)}
+.stat .n{font-size:28px;font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{color:var(--muted);font-size:12.5px;margin-top:3px}
+.stat.ok .n{color:var(--ok)}.stat.err .n{color:var(--err)}.stat.warn .n{color:var(--warn)}
+.progress{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 16px;display:flex;gap:16px;align-items:center;margin-bottom:18px}
+.bar{flex:1;height:8px;border-radius:99px;background:var(--soft);overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.progress .txt{font-size:13px;color:var(--muted);white-space:nowrap}
+.progress .txt b{color:var(--ink)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.tab{background:none;border:none;padding:10px 14px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:550}
+.tab[aria-selected=true]{color:var(--ink);border-bottom-color:var(--acc)}
+.tab .count{display:inline-block;min-width:20px;padding:0 6px;border-radius:99px;background:var(--soft);font-size:11.5px;margin-left:6px;text-align:center;color:var(--muted)}
+.tab .count.hot{background:var(--warn-bg);color:var(--warn)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.scroll{overflow:auto;max-height:calc(100vh - 330px)}
+table{border-collapse:separate;border-spacing:0;width:100%}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+thead th{position:sticky;top:0;background:var(--panel);z-index:2;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+.pill{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.03em;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.pill.auto,.pill.accepted,.pill.ok{color:var(--ok);background:var(--ok-bg)}
+.pill.review,.pill.warning{color:var(--warn);background:var(--warn-bg)}
+.pill.unmapped,.pill.rejected,.pill.info{color:var(--muted);background:var(--soft)}
+.pill.error{color:var(--err);background:var(--err-bg)}
+.req{font-size:10.5px;color:var(--err);font-weight:700;margin-left:6px;letter-spacing:.03em}
+.fname{font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:600}
+.desc{color:var(--muted);font-size:12px;margin-top:2px;max-width:260px}
+.why{color:var(--muted);font-size:12.5px;max-width:420px}
+.conf{display:flex;align-items:center;gap:8px;min-width:110px}
+.conf .track{width:64px;height:6px;border-radius:99px;background:var(--soft);overflow:hidden}
+.conf .track i{display:block;height:100%;border-radius:99px}
+.conf span{font-variant-numeric:tabular-nums;font-size:12.5px}
+select.src{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 8px;max-width:230px;width:100%}
+select.opt{background:var(--soft);border:1px solid var(--line);border-radius:7px;padding:3px 6px;font-size:12px;margin-top:6px}
+tr.flash td{animation:flash 1.6s ease}
+@keyframes flash{0%{background:var(--acc-soft)}100%{background:transparent}}
+tr.is-review td{background:color-mix(in srgb,var(--warn-bg) 45%,transparent)}
+tr.is-missing td{background:color-mix(in srgb,var(--err-bg) 45%,transparent)}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.method{font-size:11.5px;color:var(--acc);margin-top:4px}
+
+/* preview grid */
+.filters{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+.fchip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 12px;cursor:pointer;font-size:12.5px}
+.fchip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-left:auto;flex-wrap:wrap}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid var(--line)}
+.grid{font-size:12.5px}
+.grid th,.grid td{padding:7px 10px;white-space:nowrap}
+.grid thead th{text-transform:none;letter-spacing:0;font-size:12px}
+.grid thead th small{display:block;font-weight:400;color:var(--faint);font-size:11px}
+.grid .rh{position:sticky;left:0;background:var(--panel);z-index:1;color:var(--muted);font-variant-numeric:tabular-nums}
+.grid thead .rh{z-index:3}
+.grid td .o{display:block;font-weight:550}
+.grid td .s{display:block;color:var(--faint);font-size:11px;font-family:ui-monospace,Menlo,monospace;text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--faint) 50%,transparent)}
+.grid td.chg{background:var(--ok-bg)}.grid td.chg .o{color:var(--ok)}
+.grid td.w{background:var(--warn-bg)}.grid td.w .o{color:var(--warn)}
+.grid td.e{background:var(--err-bg)}.grid td.e .o{color:var(--err)}
+.grid tr.held td{background:var(--held)}
+.grid tr.held td.e{background:var(--err-bg)}
+.grid tr.held .rh{color:var(--err);font-weight:700}
+.note{color:var(--muted);font-size:12.5px;padding:10px 14px;border-top:1px solid var(--line);background:var(--soft)}
+
+/* review */
+.rv{display:grid;gap:10px}
+.item{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:10px 16px;box-shadow:var(--shadow)}
+.item.done{opacity:.6}
+.item .head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.item .prob{font-size:14px;margin:6px 0 2px}
+.item .sugg{font-size:12.5px;color:var(--muted)}
+.item .val{margin-top:6px}
+.item .acts{display:flex;flex-direction:column;gap:6px;align-items:stretch;min-width:170px}
+.item .acts .btn[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.empty{padding:40px;text-align:center;color:var(--muted)}
+
+/* source */
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:14px}
+.fact{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.fact span{display:block;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.fact b{font-weight:600}
+.fillbar{width:70px;height:6px;border-radius:99px;background:var(--soft);display:inline-block;vertical-align:middle;margin-right:6px;overflow:hidden}
+.fillbar i{display:block;height:100%;background:var(--acc)}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:5px;background:var(--soft);margin:0 4px 2px 0;color:var(--muted)}
+ul.notes{margin:0 0 14px;padding-left:18px;color:var(--muted)}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:13.5px;z-index:50;box-shadow:0 8px 30px rgba(0,0,0,.2);max-width:90vw}
+.toast.err{background:var(--err);color:#fff}
+.busy{position:fixed;inset:0;background:color-mix(in srgb,var(--bg) 60%,transparent);display:grid;place-items:center;z-index:40}
+.spin{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--acc);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+footer{color:var(--faint);font-size:12px;margin-top:30px}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <div class="brand"><div class="mark">OM</div>Onboarding Mapper <small id="ver"></small></div>
+  <div class="spacer"></div>
+  <span class="chip hidden" id="fileChip"></span>
+  <button class="btn hidden" id="newBtn" type="button">New file</button>
+  <div class="menu hidden" id="dlMenu">
+    <button class="btn primary" id="dlBtn" type="button">Download ▾</button>
+    <div class="pop hidden" id="dlPop"></div>
+  </div>
+</div></header>
+
+<main>
+<!-- START -->
+<section id="start">
+  <div class="hero">
+    <h1>Bring in your employee data</h1>
+    <p class="lead">Drop the export from your current HR or payroll system. We map it to the new system's fields, check every value, and list the few things that need your decision before import.</p>
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept=".csv,.txt,.tsv,.xlsx,.xlsm" hidden>
+      <b>Drop your export here, or click to choose a file</b>
+      <span>CSV, TXT or Excel (.xlsx) · any language: English, Spanish, German, French</span>
+    </label>
+    <div class="settings">
+      <label>Target system format<select id="schemaSel"><option value="employee">Employee record (20 fields)</option></select></label>
+      <label>Country for phone numbers without a country code
+        <select id="countrySel">
+          <option value="">Not set</option><option>ES</option><option>DE</option><option>FR</option><option>GB</option>
+          <option>IE</option><option>IT</option><option>NL</option><option>PT</option><option>PL</option><option>AT</option><option>US</option>
+        </select></label>
+      <label>Reference date for checks<input type="date" id="asOf"></label>
+    </div>
+    <div class="privacy">Your file is processed on this computer only. Nothing is uploaded to the internet.</div>
+    <h3 class="sec">Or try a sample export</h3>
+    <div class="samples" id="samples"></div>
+  </div>
+</section>
+
+<!-- WORKSPACE -->
+<section id="work" class="hidden">
+  <div class="headline">
+    <h2 id="title"></h2>
+    <div class="meta" id="subtitle"></div>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="progress" id="progress"></div>
+  <nav class="tabs" role="tablist" id="tabs">
+    <button class="tab" role="tab" data-tab="mapping" aria-selected="true">Field mapping <span class="count" id="cMap"></span></button>
+    <button class="tab" role="tab" data-tab="review" aria-selected="false">Needs your decision <span class="count" id="cRev"></span></button>
+    <button class="tab" role="tab" data-tab="preview" aria-selected="false">Data preview</button>
+    <button class="tab" role="tab" data-tab="source" aria-selected="false">Source file</button>
+  </nav>
+  <div id="pane-mapping"></div>
+  <div id="pane-review" class="hidden"></div>
+  <div id="pane-preview" class="hidden"></div>
+  <div id="pane-source" class="hidden"></div>
+  <footer id="foot"></footer>
+</section>
+</main>
+<div class="busy hidden" id="busy"><div class="spin"></div></div>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let S = null;            // current view model from the server
+let previewFilter = "all";
+let reviewFilter = "open";
+
+function toast(msg, err=false){
+  const t = document.createElement("div"); t.className = "toast" + (err ? " err" : ""); t.textContent = msg;
+  document.body.appendChild(t); setTimeout(() => t.remove(), err ? 5000 : 2600);
+}
+function busy(on){ $("#busy").classList.toggle("hidden", !on); }
+
+async function api(path, opts={}){
+  busy(true);
+  try{
+    const r = await fetch(path, opts);
+    const data = await r.json().catch(() => ({error: "unexpected response"}));
+    if(!r.ok) throw new Error(data.error || r.statusText);
+    return data;
+  } finally { busy(false); }
+}
+
+// ---------- start screen ----------
+async function init(){
+  $("#asOf").valueAsDate = new Date();
+  const d = await fetch("/api/samples").then(r => r.json());
+  $("#samples").innerHTML = d.samples.map(s => `
+    <button class="sample" data-sample="${esc(s.name)}" type="button"><b>${esc(s.file)}</b><span>${esc(s.description)}</span></button>`).join("");
+  document.querySelectorAll(".sample").forEach(b => b.onclick = () => runSample(b.dataset.sample));
+  const drop = $("#drop");
+  ["dragenter","dragover"].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave","drop"].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.remove("over"); }));
+  drop.addEventListener("drop", ev => { const f = ev.dataTransfer.files[0]; if(f) runFile(f); });
+  $("#file").onchange = ev => { const f = ev.target.files[0]; if(f) runFile(f); ev.target.value = ""; };
+  $("#newBtn").onclick = () => { S = null; show("start"); };
+  $("#dlBtn").onclick = ev => { ev.stopPropagation(); $("#dlPop").classList.toggle("hidden"); };
+  document.addEventListener("click", () => $("#dlPop").classList.add("hidden"));
+  document.querySelectorAll(".tab").forEach(t => t.onclick = () => selectTab(t.dataset.tab));
+}
+function params(){
+  const q = new URLSearchParams({schema: $("#schemaSel").value});
+  if($("#countrySel").value) q.set("country", $("#countrySel").value);
+  if($("#asOf").value) q.set("as_of", $("#asOf").value);
+  return q;
+}
+async function runFile(f){
+  try{
+    const body = await f.arrayBuffer();
+    S = await api("/api/run?" + params(), {method:"POST", body, headers:{"X-Filename": encodeURIComponent(f.name)}});
+    render(); show("work");
+  }catch(e){ toast(e.message, true); }
+}
+async function runSample(name){
+  try{
+    const q = params(); q.set("sample", name); q.delete("as_of"); if(!$("#countrySel").value) q.delete("country");
+    S = await api("/api/run?" + q, {method:"POST"});
+    render(); show("work");
+  }catch(e){ toast(e.message, true); }
+}
+function show(which){
+  $("#start").classList.toggle("hidden", which !== "start");
+  $("#work").classList.toggle("hidden", which !== "work");
+  ["#fileChip","#newBtn","#dlMenu"].forEach(s => $(s).classList.toggle("hidden", which !== "work"));
+  window.scrollTo(0,0);
+}
+function selectTab(name){
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab === name)));
+  ["mapping","review","preview","source"].forEach(p => $("#pane-"+p).classList.toggle("hidden", p !== name));
+}
+
+// ---------- server actions ----------
+async function editField(field, change){
+  try{ S = await api(`/api/session/${S.session}/mapping`, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({edits: {[field]: change}})}); render(); }
+  catch(e){ toast(e.message, true); render(); }
+}
+async function decide(key, decision){
+  const item = S.review.find(r => r.key === key);
+  const next = item.decision === decision ? "" : decision;
+  try{
+    await api(`/api/session/${S.session}/decision`, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({key, decision: next})});
+    item.decision = next; renderStats(); renderReview();
+  }catch(e){ toast(e.message, true); }
+}
+
+// ---------- render ----------
+const STATUS_LABEL = {auto:"Auto-mapped", review:"Please confirm", accepted:"Confirmed", rejected:"Not imported", unmapped:"No match"};
+const confColor = c => c >= .8 ? "var(--ok)" : c >= .55 ? "var(--warn)" : "var(--faint)";
+
+function render(){
+  $("#ver").textContent = "v" + S.version;
+  $("#fileChip").textContent = S.file.name + " · " + S.file.rows + " rows";
+  $("#title").textContent = S.file.name;
+  $("#subtitle").textContent = `${S.file.rows} rows × ${S.file.columns} columns · mapped to “${S.schema.name}” · checks as of ${S.as_of}` + (S.country ? ` · phones default to ${S.country}` : "");
+  $("#dlPop").innerHTML = [
+    ["mapped.csv","Clean records, ready to import"],
+    ["held.csv","Records held back, with the reason"],
+    ["review_queue.csv","Open questions with your decisions"],
+    ["mapping.json","The confirmed mapping, reusable next month"],
+    ["report.html","Summary report to share (personal data masked)"],
+  ].map(([n,d]) => `<a href="/api/session/${S.session}/download/${n}">${n}<span>${d}</span></a>`).join("");
+  renderStats(); renderMapping(); renderReview(); renderPreview(); renderSource();
+  $("#foot").textContent = `Layout fingerprint ${S.file.fingerprint} · onboarding-mapper ${S.version} · runs locally, no data leaves this computer.`;
+}
+
+function renderStats(){
+  const st = S.stats;
+  const open = S.review.filter(r => !r.decision).length;
+  const mapped = S.fields.filter(f => f.active).length;
+  $("#stats").innerHTML = [
+    ["ok", st.records_ready, "records ready to import"],
+    [st.records_held ? "err" : "", st.records_held, "records held back"],
+    [open ? "warn" : "ok", open, "open decisions"],
+    ["", `${mapped}/${S.fields.length}`, "target fields filled"],
+    ["", S.held_back.length, "sensitive columns kept out"],
+  ].map(([c,n,l]) => `<div class="stat ${c}"><div class="n">${esc(n)}</div><div class="l">${esc(l)}</div></div>`).join("");
+  const total = st.rows_in || 1;
+  const decided = S.review.length - open;
+  $("#progress").innerHTML = `
+    <div class="txt"><b>${st.records_ready}</b> of ${st.rows_in} records ready</div>
+    <div class="bar"><i style="width:${st.records_ready/total*100}%;background:var(--ok)"></i><i style="width:${st.records_held/total*100}%;background:var(--err)"></i></div>
+    <div class="txt"><b>${decided}</b> of ${S.review.length} decisions made · <b>${st.cells_normalised}</b> values cleaned</div>`;
+  const cr = $("#cRev"); cr.textContent = open; cr.classList.toggle("hot", open > 0);
+  $("#cMap").textContent = `${mapped}/${S.fields.length}`;
+}
+
+function sourceSelect(f){
+  const held = new Set(S.held_back.map(h => h.source));
+  const opts = [`<option value="">— not imported —</option>`].concat(S.headers.map(h =>
+    `<option value="${esc(h)}" ${f.active && f.source === h ? "selected" : ""} ${held.has(h) ? "disabled" : ""}>${esc(h)}${held.has(h) ? " (sensitive, kept out)" : ""}</option>`));
+  return `<select class="src" data-field="${esc(f.field)}">${opts.join("")}</select>`;
+}
+
+function renderMapping(){
+  const rows = S.fields.map(f => {
+    const st = f.active ? f.status : (f.status === "rejected" ? "rejected" : "unmapped");
+    const cls = st === "review" ? "is-review" : (!f.active && f.required ? "is-missing" : "");
+    const conf = f.active && f.status !== "accepted" ? `<div class="conf"><div class="track"><i style="width:${f.confidence*100}%;background:${confColor(f.confidence)}"></i></div><span>${f.confidence.toFixed(2)}</span></div>` : (f.status === "accepted" ? `<span class="why">set by you</span>` : "");
+    let method = "";
+    if(f.active && f.method === "split_full_name") method = `<div class="method">split from a full-name column (${esc(f.options.part)} name)</div>`;
+    if(f.active && f.method === "currency_from_amount") method = `<div class="method">currency read from the amounts</div>`;
+    let opt = "";
+    if(f.active && f.type === "date" && f.method === "direct") opt = `<select class="opt" data-field="${esc(f.field)}" data-opt="date_order"><option value="dmy" ${f.options.date_order==="dmy"?"selected":""}>Dates are day/month</option><option value="mdy" ${f.options.date_order==="mdy"?"selected":""}>Dates are month/day</option></select>`;
+    if(f.active && (f.type === "decimal" || f.type === "ratio") && f.method === "direct") opt = `<select class="opt" data-field="${esc(f.field)}" data-opt="number_style"><option value="eu" ${f.options.number_style==="eu"?"selected":""}>1.234,56 (decimal comma)</option><option value="us" ${f.options.number_style==="us"?"selected":""}>1,234.56 (decimal point)</option></select>`;
+    let acts = "";
+    if(f.active && f.status === "review") acts = `<button class="btn small primary" data-act="accepted" data-field="${esc(f.field)}">Confirm</button><button class="btn small" data-act="rejected" data-field="${esc(f.field)}">Don't import</button>`;
+    else if(f.active) acts = `<button class="btn small ghost" data-act="rejected" data-field="${esc(f.field)}">Don't import</button>`;
+    else if(f.alternatives && f.alternatives.length) acts = `<span class="why">closest: ${f.alternatives.map(a => esc(a.source)).join(", ")}</span>`;
+    const why = f.active ? f.reasons.join("; ") : (f.required ? "Required by the target system. Pick the column that holds it, or ask for it in the export." : "No column in the file matches this field.");
+    return `<tr class="${cls}" id="row-${esc(f.field)}">
+      <td><span class="fname">${esc(f.field)}</span>${f.required ? '<span class="req">REQUIRED</span>' : ""}<div class="desc">${esc(f.description)}</div></td>
+      <td>${sourceSelect(f)}${method}${opt}</td>
+      <td>${conf}</td>
+      <td><span class="pill ${st}">${STATUS_LABEL[st]}</span></td>
+      <td class="why">${esc(why)}</td>
+      <td><div class="actions">${acts}</div></td></tr>`;
+  }).join("");
+  $("#pane-mapping").innerHTML = `<div class="card"><div class="scroll"><table>
+    <thead><tr><th>Target field</th><th>Comes from column</th><th>Confidence</th><th>Status</th><th>Why</th><th></th></tr></thead>
+    <tbody>${rows}</tbody></table></div>
+    <div class="note">Change any column in the drop-down and everything re-checks instantly. Confirmed choices are saved in <code>mapping.json</code> for next month's export.</div></div>`;
+  document.querySelectorAll("select.src").forEach(s => s.onchange = () => editField(s.dataset.field, {source: s.value || null}));
+  document.querySelectorAll("select.opt").forEach(s => s.onchange = () => editField(s.dataset.field, {options: {[s.dataset.opt]: s.value}}));
+  document.querySelectorAll("[data-act]").forEach(b => b.onclick = () => editField(b.dataset.field, {status: b.dataset.act}));
+}
+
+const KIND_LABEL = {mapping:"Mapping", privacy:"Privacy", record:"Record", value:"Value"};
+function renderReview(){
+  const items = S.review.filter(r => reviewFilter === "all" ? true : reviewFilter === "open" ? !r.decision : !!r.decision);
+  const chips = ["open","done","all"].map(k => `<button class="fchip" data-rf="${k}" aria-pressed="${reviewFilter===k}">${{open:"Open",done:"Decided",all:"All"}[k]} (${k==="open"?S.review.filter(r=>!r.decision).length:k==="done"?S.review.filter(r=>r.decision).length:S.review.length})</button>`).join("");
+  const cards = items.map(r => {
+    const target = r.field && S.fields.some(f => f.field === r.field) && r.kind === "mapping";
+    const val = r.value ? `<div class="val"><code>${esc(r.value)}</code></div>` : "";
+    return `<div class="item ${r.decision ? "done" : ""}">
+      <div>
+        <div class="head"><span class="pill ${r.severity}">${r.severity.toUpperCase()}</span><span>${KIND_LABEL[r.kind]}</span>
+          ${r.field ? `<span>· <span class="fname" style="font-size:12px">${esc(r.field)}</span></span>` : ""}
+          ${r.source && r.source !== r.field ? `<span>· column “${esc(r.source)}”</span>` : ""}
+          ${r.row ? `<span>· line ${esc(r.row)}</span>` : ""}</div>
+        <div class="prob">${esc(r.problem)}</div>${val}
+        ${r.suggestion ? `<div class="sugg">Suggested: ${esc(r.suggestion)}</div>` : ""}
+      </div>
+      <div class="acts">
+        ${target ? `<button class="btn small primary" data-goto="${esc(r.field)}">Open in mapping</button>` : ""}
+        <button class="btn small" data-key="${esc(r.key)}" data-dec="accept" aria-pressed="${r.decision==="accept"}">Accept as is</button>
+        <button class="btn small" data-key="${esc(r.key)}" data-dec="fix" aria-pressed="${r.decision==="fix"}">Customer will fix</button>
+        <button class="btn small" data-key="${esc(r.key)}" data-dec="ignore" aria-pressed="${r.decision==="ignore"}">Ignore</button>
+      </div></div>`;
+  }).join("");
+  $("#pane-review").innerHTML = `<div class="filters">${chips}<span class="legend">Errors keep a record out of the import; warnings don't.</span></div>
+    <div class="rv">${cards || `<div class="card empty">${reviewFilter==="open" ? "Nothing left to decide." : "No items."}</div>`}</div>`;
+  document.querySelectorAll("[data-rf]").forEach(b => b.onclick = () => { reviewFilter = b.dataset.rf; renderReview(); });
+  document.querySelectorAll("[data-dec]").forEach(b => b.onclick = () => decide(b.dataset.key, b.dataset.dec));
+  document.querySelectorAll("[data-goto]").forEach(b => b.onclick = () => {
+    selectTab("mapping"); const row = document.getElementById("row-" + b.dataset.goto);
+    if(row){ row.scrollIntoView({block:"center"}); row.classList.remove("flash"); void row.offsetWidth; row.classList.add("flash"); }
+  });
+}
+
+function renderPreview(){
+  const fields = S.fields.filter(f => f.active).map(f => f.field);
+  let rows = S.preview;
+  if(previewFilter === "ready") rows = rows.filter(r => !r.held);
+  if(previewFilter === "held") rows = rows.filter(r => r.held);
+  if(previewFilter === "issues") rows = rows.filter(r => r.held || fields.some(f => r.cells[f].sev && r.cells[f].sev !== "info"));
+  const chips = [["all","All"],["ready","Ready"],["held","Held back"],["issues","With issues"]].map(([k,l]) => `<button class="fchip" data-pf="${k}" aria-pressed="${previewFilter===k}">${l}</button>`).join("");
+  const head = fields.map(f => { const m = S.fields.find(x => x.field === f); return `<th>${esc(f)}<small>${esc(m.source)}</small></th>`; }).join("");
+  const body = rows.map(r => `<tr class="${r.held ? "held" : ""}" title="${esc(r.why.join("\n"))}"><td class="rh">${r.line}${r.held ? " ✕" : ""}</td>` + fields.map(f => {
+      const c = r.cells[f]; const cls = c.sev === "error" ? "e" : c.sev === "warning" ? "w" : (c.changed ? "chg" : "");
+      const src = c.changed && c.src ? `<span class="s">${esc(c.src)}</span>` : "";
+      return `<td class="${cls}" title="${esc(c.notes.join("\n"))}"><span class="o">${esc(c.out) || "&nbsp;"}</span>${src}</td>`;
+    }).join("") + "</tr>").join("");
+  $("#pane-preview").innerHTML = `<div class="filters">${chips}
+    <span class="legend"><span><i style="background:var(--ok-bg)"></i>cleaned (old value struck through)</span><span><i style="background:var(--warn-bg)"></i>warning</span><span><i style="background:var(--err-bg)"></i>error</span><span><i style="background:var(--held)"></i>row held back — hover for why</span></span></div>
+    <div class="card"><div class="scroll"><table class="grid"><thead><tr><th class="rh">Line</th>${head}</tr></thead><tbody>${body || `<tr><td class="empty" colspan="${fields.length+1}">No rows.</td></tr>`}</tbody></table></div>
+    <div class="note">Showing ${rows.length} of the first ${S.preview.length} rows (file has ${S.preview_total}). Download <code>mapped.csv</code> for the full result.</div></div>`;
+  document.querySelectorAll("[data-pf]").forEach(b => b.onclick = () => { previewFilter = b.dataset.pf; renderPreview(); });
+}
+
+function renderSource(){
+  const f = S.file;
+  const facts = [["Rows", f.rows],["Columns", f.columns],["Encoding", f.encoding],["Delimiter", f.delimiter ? JSON.stringify(f.delimiter) : "—"],["Header row", f.header_row],["Layout fingerprint", f.fingerprint]];
+  const manager = Object.entries(S.manager_resolution || {}).map(([k,v]) => `<li>${esc(k)} resolved by id: ${v.id}, by work email: ${v.email}, by name: ${v.name}</li>`).join("");
+  const rows = S.columns.map(c => `<tr>
+      <td><b>${esc(c.header)}</b></td>
+      <td><span class="pill ${c.state==="used"?"ok":c.state==="held back"?"error":"info"}">${esc(c.state)}</span>${c.note ? `<div class="why" style="margin-top:4px">${esc(c.note)}</div>` : ""}</td>
+      <td><span class="fillbar"><i style="width:${c.fill*100}%"></i></span>${Math.round(c.fill*100)}%</td>
+      <td>${c.distinct}</td>
+      <td>${c.looks_like.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</td>
+      <td class="mono">${c.samples.map(esc).join("<br>") || (c.state==="held back" ? '<span class="why">not shown</span>' : "")}</td></tr>`).join("");
+  $("#pane-source").innerHTML = `<div class="facts">${facts.map(([k,v]) => `<div class="fact"><span>${k}</span><b>${esc(v)}</b></div>`).join("")}</div>
+    ${(f.notes.length || manager) ? `<ul class="notes">${f.notes.map(n => `<li>${esc(n)}</li>`).join("")}${manager}</ul>` : ""}
+    <div class="card"><div class="scroll"><table><thead><tr><th>Column in your file</th><th>Used?</th><th>Filled</th><th>Distinct</th><th>Looks like</th><th>Examples</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+}
+
+init();
+</script>
+</body>
+</html>
